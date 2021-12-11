@@ -39,4 +39,5 @@ public class ObjetGraphique {
 	/*Je teste des trucs */
 	/*tiens moi aussi */
 	// nouveau test 2.0
+	// reponse test 2.0
 }
