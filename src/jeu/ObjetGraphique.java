@@ -37,4 +37,5 @@ public class ObjetGraphique {
 	};
 	
 	/*Je teste des trucs */
+	/*tiens moi aussi */
 }
