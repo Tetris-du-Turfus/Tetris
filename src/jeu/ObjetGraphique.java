@@ -35,4 +35,6 @@ public class ObjetGraphique {
 	public void setTailleCase(int tailleCase) {
 		this.tailleCase = tailleCase;
 	};
+	
+	/*Je teste des trucs */
 }
