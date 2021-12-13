@@ -1,6 +1,7 @@
 package jeu;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -36,6 +37,9 @@ public class Interface extends JFrame {
 	 * Create the frame.
 	 */
 	public Interface() {
+		
+		this.getContentPane().setBackground(Color.WHITE);
+
 		a=5;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -46,6 +50,9 @@ public class Interface extends JFrame {
 		JLabel lblNewLabel = new JLabel(Integer.toString(a));
 		lblNewLabel.setBounds(185, 118, 45, 13);
 		contentPane.add(lblNewLabel);
+		
+		//this.fillRect (10, 10, 200, 200);  
+		
 	}
 
 }
