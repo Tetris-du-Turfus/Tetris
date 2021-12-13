@@ -4,6 +4,7 @@ public class ObjetGraphique {
 	protected int x;
 	protected int y;
 	protected int tailleCase;
+	protected int couleur ;
 	
 	public ObjetGraphique(int x, int y, int tailleCase) {
 		super();
@@ -35,5 +36,14 @@ public class ObjetGraphique {
 	public void setTailleCase(int tailleCase) {
 		this.tailleCase = tailleCase;
 	};
+	
+	public int getCouleur() {
+		return couleur;
+	}
+
+	public void setCouleur(int c) {
+		this.couleur = c;
+	}
+	
 	
 }
