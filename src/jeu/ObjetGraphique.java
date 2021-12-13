@@ -6,10 +6,11 @@ public class ObjetGraphique {
 	protected int tailleCase;
 	protected int couleur ;
 	
-	public ObjetGraphique(int x, int y, int tailleCase) {
+	public ObjetGraphique(int x, int y, int tailleCase,int couleur) {
 		super();
 		this.x = x;
 		this.y = y;
+		this.couleur=couleur;
 		this.tailleCase = tailleCase;
 	}
 
