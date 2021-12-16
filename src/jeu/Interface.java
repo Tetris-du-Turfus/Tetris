@@ -54,5 +54,7 @@ public class Interface extends JFrame {
 		//this.fillRect (10, 10, 200, 200);  
 		
 	}
+	
+	// comment test
 
 }
