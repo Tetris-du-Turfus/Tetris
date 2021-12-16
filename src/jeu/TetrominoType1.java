@@ -73,7 +73,7 @@ public class TetrominoType1 extends Tetromino{
 		this.tab[2][3][2]=new ObjetGraphique(2,3,tailleCase,0);
 		this.tab[3][3][2]=new ObjetGraphique(3,3,tailleCase,0);
 
-		// porsition 3
+		// position 3
 		
 		this.tab[0][0][3]=new ObjetGraphique(0,0,tailleCase,0);
 		this.tab[1][0][3]=new ObjetGraphique(1,0,tailleCase,0);
