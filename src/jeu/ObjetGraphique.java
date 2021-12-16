@@ -56,4 +56,6 @@ public class ObjetGraphique {
 		 // On trace un rectangle dans l'objet de type Graphics passé en paramètre
 		 g.fillRect(this.x,this.y, this.tailleCase,this.tailleCase);
 	 }
+	
+	// test ici
 }
