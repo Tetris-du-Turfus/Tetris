@@ -58,4 +58,5 @@ public class ObjetGraphique {
 	 }
 	
 	// test ici
+	// comment
 }
