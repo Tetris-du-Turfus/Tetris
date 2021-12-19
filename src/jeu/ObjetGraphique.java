@@ -11,15 +11,27 @@ public class ObjetGraphique {
 	
 	public ObjetGraphique(int x, int y, int tailleCase,int couleur) {
 		super();
-		this.x = x;
-		this.y = y;
-		this.couleur=couleur;
+		this.x = x*tailleCase;
+		this.y = y*tailleCase;
 		this.tailleCase = tailleCase;
+		this.couleur=couleur;
+
+	}
+	
+	public ObjetGraphique(int x, int y, int tailleCase) {
+		super();
+		this.x = x*tailleCase;
+		this.y = y*tailleCase;
+		this.tailleCase = tailleCase;
+		//paramètre par défault 0
+		this.couleur=0;
+
 	}
 
 	public int getX() {
 		return x;
 	}
+
 
 	public void setX(int x) {
 		this.x = x;
