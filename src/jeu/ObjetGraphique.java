@@ -63,8 +63,15 @@ public class ObjetGraphique {
 	
 	//@Override
 	public void Afficher(Graphics g) {
-		 // On changer la couleur du pinceau
-		 g.setColor(Color.RED);
+		// On changer la couleur du pinceau
+		if (couleur==0) {
+			g.setColor(Color.BLUE);
+		}
+		else {
+			 g.setColor(Color.RED);
+		}
+
+
 		 // On trace un rectangle dans l'objet de type Graphics passé en paramètre
 		 g.fillRect(this.x,this.y, this.tailleCase,this.tailleCase);
 	 }

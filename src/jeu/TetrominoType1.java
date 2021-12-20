@@ -1,12 +1,14 @@
 package jeu;
 
+import java.awt.Graphics;
+
 public class TetrominoType1 extends Tetromino{
 
-	public TetrominoType1(int type, int position,int tailleCase) {
-		super(type, position);
+	public TetrominoType1(int position,int tailleCase) {
+		super(1, position);
 		// TODO Auto-generated constructor stub
 		int couleur =10;
-		
+		this.tab = new ObjetGraphique[4][4][4];
 		//position 0
 		
 		this.tab[0][0][0]=new ObjetGraphique(0,0,tailleCase,0);
@@ -96,5 +98,15 @@ public class TetrominoType1 extends Tetromino{
 		this.tab[3][3][3]=new ObjetGraphique(3,3,tailleCase,0);
 	}
 
+	public void Afficher(Graphics g) {
+		
+		
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 4; j++) {
+				tab[i][j][position].Afficher(g);
+			}
+		}
+		
+	}
 
 }

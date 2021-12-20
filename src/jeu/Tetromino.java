@@ -1,6 +1,7 @@
 package jeu;
+import java.awt.Graphics;
 
-public class Tetromino {
+public abstract class Tetromino {
 	
 	protected ObjetGraphique[][][] tab;
 	protected int position;
@@ -8,7 +9,7 @@ public class Tetromino {
 	
 	public Tetromino() {
 		// TODO Auto-generated constructor stub
-		ObjetGraphique[][][] tab = new ObjetGraphique[4][4][4];
+		this.tab = new ObjetGraphique[4][4][4];
 	}
 
 	public Tetromino(int type, int position) {
@@ -34,4 +35,5 @@ public class Tetromino {
 		this.type = type;
 	}
 	
+	public abstract void Afficher(Graphics g);
 }
