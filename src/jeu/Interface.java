@@ -55,10 +55,14 @@ public class Interface extends JFrame {
 	 bufferGraphics.fillRect(0,0,this.getContentPane().getWidth(),this.getContentPane().getHeight());
 	 
 	 // on dessine notre objet au sein de notre image
-	 bufferGraphics.setColor(Color.RED);
+	 bufferGraphics.setColor(Color.YELLOW);
 	 bufferGraphics.fillRect(0,0,50,50);
 	 bufferGraphics.setColor(Color.GREEN);
 	 bufferGraphics.fillRect(50,50,50,50);
+	 ObjetGraphique Objt1=new ObjetGraphique(0, 1, 50);
+	 Objt1.Afficher(bufferGraphics);
+	 ObjetGraphique Objt2=new ObjetGraphique(1, 0, 50);
+	 Objt2.Afficher(bufferGraphics);
 	 // On afficher l'image mémoire à l'écran, on choisit où afficher l'image 
 	 g.drawImage(offscreen,50,50,null);
 	}
