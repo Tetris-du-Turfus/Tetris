@@ -46,19 +46,21 @@ public class Interface extends JFrame {
 	{
 	 Graphics bufferGraphics;
 	 Image offscreen;
-	 // On crée une image en mémoire de la taille du ContentPane
-	 offscreen = createImage(this.getContentPane().getWidth(),this.getContentPane().getHeight());
+	 // On crée une image en mémoire de la taille du ContentPane, on peut choisir la taille que l'on souhaite
+	 offscreen = createImage(100,100);
 	 // On récupère l'objet de type Graphics permettant de dessiner dans cette image
 	 bufferGraphics = offscreen.getGraphics();
 	 // On colore le fond de l'image en blanc
 	 bufferGraphics.setColor(Color.WHITE);
 	 bufferGraphics.fillRect(0,0,this.getContentPane().getWidth(),this.getContentPane().getHeight());
-	 // On dessine les objets graphiques de la liste dans l'image en mémoire pour éviter les
-	 // problèmes de scintillements
+	 
+	 // on dessine notre objet au sein de notre image
 	 bufferGraphics.setColor(Color.RED);
 	 bufferGraphics.fillRect(0,0,50,50);
-	 // On afficher l'image mémoire à l'écran
-	 g.drawImage(offscreen,0,0,null);
+	 bufferGraphics.setColor(Color.GREEN);
+	 bufferGraphics.fillRect(50,50,50,50);
+	 // On afficher l'image mémoire à l'écran, on choisit où afficher l'image 
+	 g.drawImage(offscreen,50,50,null);
 	}
 	
 	/**
