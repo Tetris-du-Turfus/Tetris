@@ -11,8 +11,8 @@ public class ObjetGraphique {
 	
 	public ObjetGraphique(int x, int y, int tailleCase,int couleur) {
 		super();
-		this.x = x*tailleCase;
-		this.y = y*tailleCase;
+		this.x = x;
+		this.y = y;
 		this.tailleCase = tailleCase;
 		this.couleur=couleur;
 
@@ -20,8 +20,8 @@ public class ObjetGraphique {
 	
 	public ObjetGraphique(int x, int y, int tailleCase) {
 		super();
-		this.x = x*tailleCase;
-		this.y = y*tailleCase;
+		this.x = x;
+		this.y = y;
 		this.tailleCase = tailleCase;
 		//paramètre par défault 0
 		this.couleur=0;
@@ -73,7 +73,7 @@ public class ObjetGraphique {
 
 
 		 // On trace un rectangle dans l'objet de type Graphics passé en paramètre
-		 g.fillRect(this.x,this.y, this.tailleCase,this.tailleCase);
+		 g.fillRect(this.x*this.tailleCase,this.y*this.tailleCase, this.tailleCase,this.tailleCase);
 	 }
 	
 	// test ici

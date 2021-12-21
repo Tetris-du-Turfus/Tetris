@@ -103,7 +103,8 @@ public class TetrominoType1 extends Tetromino{
 		
 		for (int i = 0; i < 4; i++) {
 			for (int j = 0; j < 4; j++) {
-				tab[i][j][position].Afficher(g);
+				if(this.tab[i][j][position].couleur!=0)
+					this.tab[i][j][position].Afficher(g);
 			}
 		}
 		

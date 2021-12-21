@@ -111,6 +111,7 @@ public class Interface extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				//dessiner(contentPane.getGraphics());
 				dessinerTetromino(contentPane.getGraphics());
+				Objt.Gauche();
 			}
 		});
 		btnNewButton.setBounds(104, 153, 85, 21);
