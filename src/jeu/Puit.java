@@ -1,5 +1,7 @@
 package jeu;
 
+import java.awt.Graphics;
+
 public class Puit {
 	
 	protected ObjetGraphique[][] grille;
@@ -27,5 +29,10 @@ public class Puit {
 		// TODO Auto-generated constructor stub
 		
 	}
+	
+	public void Afficher(Graphics g) {
+		 g.fillRect(this.positionXGrille,this.positionYGrille, this.dimGrilleX,this.dimGrilleY);
+	}
+
 
 }

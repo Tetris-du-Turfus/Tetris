@@ -26,6 +26,7 @@ public class Interface extends JFrame {
 	private JPanel contentPane;
 	int a;
 	TetrominoType7 Objt;
+	Puit p ;
 	/**
 	 * Launch the application.
 	 */
@@ -41,6 +42,25 @@ public class Interface extends JFrame {
 			}
 		});
 	}
+	
+	public void dessinerPuit(Graphics g) {
+		
+		 Graphics bufferGraphics;
+		 Image offscreen;
+
+		 offscreen = createImage(600,600);
+		 // On récupère l'objet de type Graphics permettant de dessiner dans cette image
+		 bufferGraphics = offscreen.getGraphics();
+		 // On colore le fond de l'image en blanc
+		 bufferGraphics.setColor(Color.WHITE);
+		 bufferGraphics.fillRect(0,0,this.getContentPane().getWidth(),this.getContentPane().getHeight()); 
+		 // on dessine notre objet au sein de notre image
+		 //Puit p=new Puit(10,10,50)
+		 p.Afficher(bufferGraphics);
+		 // On afficher l'image mémoire à l'écran, on choisit où afficher l'image 
+		 g.drawImage(offscreen,50,50,null);
+	}
+	
 	public void dessinerTetromino(Graphics g)
 	{
 	 Graphics bufferGraphics;
@@ -90,6 +110,8 @@ public class Interface extends JFrame {
 	 */
 	public Interface() {
 		Objt=new TetrominoType7(0, 50);
+		p = new Puit(10,10,50);
+		
 		this.getContentPane().setBackground(Color.WHITE);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -99,19 +121,22 @@ public class Interface extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		
+		/*
 		//écriture 5
 		a=5;
 		JLabel lblNewLabel = new JLabel(Integer.toString(a));
 		lblNewLabel.setBounds(185, 118, 45, 13);
 		contentPane.add(lblNewLabel);
+		*/
 		
 		JButton btnNewButton = new JButton("Jouer");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//dessiner(contentPane.getGraphics());
-				dessinerTetromino(contentPane.getGraphics());
-				Objt.Gauche();
+				//dessinerTetromino(contentPane.getGraphics());
+				//Objt.Gauche();
+				
+				dessinerPuit(contentPane.getGraphics());
 			}
 		});
 		btnNewButton.setBounds(104, 153, 85, 21);
