@@ -25,7 +25,7 @@ public class Interface extends JFrame {
 
 	private JPanel contentPane;
 	int a;
-	TetrominoType1 Objt;
+	TetrominoType7 Objt;
 	/**
 	 * Launch the application.
 	 */
@@ -89,7 +89,7 @@ public class Interface extends JFrame {
 	 * Create the frame.
 	 */
 	public Interface() {
-		Objt=new TetrominoType1(1, 50);
+		Objt=new TetrominoType7(0, 50);
 		this.getContentPane().setBackground(Color.WHITE);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
