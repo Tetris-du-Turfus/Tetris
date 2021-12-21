@@ -109,7 +109,7 @@ public class Interface extends JFrame {
 	 * Create the frame.
 	 */
 	public Interface() {
-		Objt=new TetrominoType7(0, 50);
+		Objt=new TetrominoType7(0, 20);
 		p = new Puit(10,10,50);
 		
 		this.getContentPane().setBackground(Color.WHITE);
@@ -133,10 +133,10 @@ public class Interface extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//dessiner(contentPane.getGraphics());
-				//dessinerTetromino(contentPane.getGraphics());
+				dessinerTetromino(contentPane.getGraphics());
 				//Objt.Gauche();
 				
-				dessinerPuit(contentPane.getGraphics());
+				//dessinerPuit(contentPane.getGraphics());
 			}
 		});
 		btnNewButton.setBounds(104, 153, 85, 21);
