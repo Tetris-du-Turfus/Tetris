@@ -34,7 +34,20 @@ public abstract class Tetromino {
 	public void setType(int type) {
 		this.type = type;
 	}
+	public ObjetGraphique getObjetGraphique(int i, int j) {
+		return tab[i][j][position];
+	}
 	
+	public void setRepere(int x,int y) {
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 4; j++) {
+				for (int k = 0; k < 4; k++) {
+					this.tab[i][j][k].setX(this.tab[i][j][k].getX()+x);
+					this.tab[i][j][k].setY(this.tab[i][j][k].getY()+y);
+				}
+			}
+		}
+	}
 	public void Gauche() {
 		for (int i = 0; i < 4; i++) {
 			for (int j = 0; j < 4; j++) {
@@ -67,5 +80,6 @@ public abstract class Tetromino {
 			}
 		}
 	}
+	
 	public abstract void Afficher(Graphics g);
 }

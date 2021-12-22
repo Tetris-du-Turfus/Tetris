@@ -65,7 +65,7 @@ public class ObjetGraphique {
 	public void Afficher(Graphics g) {
 		// On changer la couleur du pinceau
 		if (couleur==0) {
-			g.setColor(Color.BLUE);
+			g.setColor(Color.GRAY);
 		}
 		else {
 			 g.setColor(Color.RED);

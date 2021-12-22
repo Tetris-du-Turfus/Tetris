@@ -70,12 +70,12 @@ public class Interface extends JFrame {
 		 Graphics bufferGraphics;
 		 Image offscreen;
 
-		 offscreen = createImage(600,600);
+		 offscreen = createImage(300,480);
 		 // On récupère l'objet de type Graphics permettant de dessiner dans cette image
 		 bufferGraphics = offscreen.getGraphics();
 		 // On colore le fond de l'image en blanc
-		 bufferGraphics.setColor(Color.WHITE);
-		 bufferGraphics.fillRect(0,0,this.getContentPane().getWidth(),this.getContentPane().getHeight()); 
+		 bufferGraphics.setColor(Color.GRAY);
+		 //bufferGraphics.fillRect(0,0,this.getContentPane().getWidth(),this.getContentPane().getHeight()); 
 		 // on dessine notre objet au sein de notre image
 		 //Puit p=new Puit(10,10,50)
 		 p.Afficher(bufferGraphics);
@@ -132,8 +132,8 @@ public class Interface extends JFrame {
 	 */
 	public Interface() {
 		Objt=new TetrominoType7(0, 20);
-		p = new Puit(10,10,50);
-		
+		p = new Puit(10,10,20);
+		p.AjouterTetromino(Objt);
 		contentPane = new JPanel();
 		
 		contentPane.addMouseListener(new MouseAdapter() {
@@ -164,10 +164,11 @@ public class Interface extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//dessiner(contentPane.getGraphics());
-				dessinerTetromino(contentPane.getGraphics());
+				//dessinerTetromino(contentPane.getGraphics());
 				//Objt.Gauche();
 				
-				//dessinerPuit(contentPane.getGraphics());
+				dessinerPuit(contentPane.getGraphics());
+				p.déplacementBas();
 			}
 		});
 		btnNewButton.setBounds(104, 153, 85, 21);
