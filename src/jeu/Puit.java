@@ -164,6 +164,15 @@ public class Puit {
 		}
 		 
 	}
+	
+	public void RotationTetromino() {
+		int position = this.TetromnoActuel.getPosition();
+		this.TetromnoActuel.setPosition((position+1)%4);
+		
+		//MAJ grille
+		
+		
+	}
 
 
 }
