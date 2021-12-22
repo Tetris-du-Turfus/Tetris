@@ -17,6 +17,9 @@ import javax.swing.JLabel;
 import java.awt.Image;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
@@ -45,24 +48,15 @@ public class Interface extends JFrame {
 		});
 	}
 	
-	private void formMouseClicked(java.awt.event.MouseEvent evt) {
-		 // On récupere les coordonnées du pointeur de la souris dans la fenêtre
-		 int sourisX = evt.getPoint().x;
-		 int sourisY = evt.getPoint().y;
-		 
-		 // On fait le changement de repère pour se ramener au ContentPane
-		 sourisY-= (this.getHeight()-this.getContentPane().getHeight());
-		 
-		 System.out.println( sourisX );
-		 System.out.println( sourisY );
-
-		 // marche pas
-		 if (sourisX <= 70 && sourisX >= 50 && sourisY <= 70 && sourisY >= 50 ) {
+	private void KeyPressed(KeyEvent evt) {
+		
+		 if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
 			 
-			 Objt.setPosition(Objt.getPosition()+1); // gérer modulo
-			 dessinerTetromino(contentPane.getGraphics());
+			 System.out.println("ok");
+			 
+			 p.RotationTetromino();
+			 dessinerPuit(contentPane.getGraphics());
 		 }
-		 
 	}
 	
 	public void dessinerPuit(Graphics g) {
@@ -136,10 +130,12 @@ public class Interface extends JFrame {
 		p.AjouterTetromino(Objt);
 		contentPane = new JPanel();
 		
-		contentPane.addMouseListener(new MouseAdapter() {
+		contentPane.setFocusable(true);
+
+		contentPane.addKeyListener(new KeyAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
-				formMouseClicked(e);
+			public void keyPressed(KeyEvent e) {
+				KeyPressed(e);
 			}
 		});
 		
@@ -161,6 +157,8 @@ public class Interface extends JFrame {
 		*/
 		
 		JButton btnNewButton = new JButton("Jouer");
+		btnNewButton.setFocusable(false);
+		
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//dessiner(contentPane.getGraphics());
