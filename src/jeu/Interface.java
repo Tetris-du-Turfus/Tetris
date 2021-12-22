@@ -17,6 +17,8 @@ import javax.swing.JLabel;
 import java.awt.Image;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
 
 
@@ -41,6 +43,26 @@ public class Interface extends JFrame {
 				}
 			}
 		});
+	}
+	
+	private void formMouseClicked(java.awt.event.MouseEvent evt) {
+		 // On récupere les coordonnées du pointeur de la souris dans la fenêtre
+		 int sourisX = evt.getPoint().x;
+		 int sourisY = evt.getPoint().y;
+		 
+		 // On fait le changement de repère pour se ramener au ContentPane
+		 sourisY-= (this.getHeight()-this.getContentPane().getHeight());
+		 
+		 System.out.println( sourisX );
+		 System.out.println( sourisY );
+
+		 // marche pas
+		 if (sourisX <= 70 && sourisX >= 50 && sourisY <= 70 && sourisY >= 50 ) {
+			 
+			 Objt.setPosition(Objt.getPosition()+1); // gérer modulo
+			 dessinerTetromino(contentPane.getGraphics());
+		 }
+		 
 	}
 	
 	public void dessinerPuit(Graphics g) {
@@ -112,11 +134,20 @@ public class Interface extends JFrame {
 		Objt=new TetrominoType7(0, 20);
 		p = new Puit(10,10,50);
 		
+		contentPane = new JPanel();
+		
+		contentPane.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				formMouseClicked(e);
+			}
+		});
+		
 		this.getContentPane().setBackground(Color.WHITE);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
-		contentPane = new JPanel();
+		
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -141,6 +172,8 @@ public class Interface extends JFrame {
 		});
 		btnNewButton.setBounds(104, 153, 85, 21);
 		contentPane.add(btnNewButton);
+		
+		
 		
 	}
 	
