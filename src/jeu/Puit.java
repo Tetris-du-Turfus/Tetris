@@ -33,18 +33,18 @@ public class Puit {
 		this.TetromnoActuel.setRepere(5, 0);
 		for(int i=0;i<4;i++) {
 			for (int j = 0; j < 4; j++) {
-				this.grille[i+5][j]=this.TetromnoActuel.getObjetGraphique(i, j);
+				this.grille[i+5][j].setCouleur(t.getObjetGraphique(i, j).getCouleur());
 			}
 		}
 	}
 	public void déplacementBas() {
-		//tester si le déplacement est possible
+		//tester avant si le déplacement est possible
 		for(int i=0; i<4; i++) {
-			for (int j = 3; j > 0; j--) {
-				/*if(this.TetromnoActuel.getObjetGraphique(i, j).getCouleur()!=0) {
-					grille[TetromnoActuel.getObjetGraphique(0, 0).getX()][TetromnoActuel.getObjetGraphique(i, j).getY()].setCouleur(0);
+			for (int j = 3; j > -1; j--) {
+				if(this.TetromnoActuel.getObjetGraphique(i, j).getCouleur()!=0) {
+					grille[TetromnoActuel.getObjetGraphique(i, j).getX()][TetromnoActuel.getObjetGraphique(i, j).getY()].setCouleur(0);
 					grille[TetromnoActuel.getObjetGraphique(i, j).getX()][TetromnoActuel.getObjetGraphique(i, j).getY()+1].setCouleur(this.TetromnoActuel.getObjetGraphique(i, j).getCouleur());
-				}*/	
+				}
 			}
 		}
 		this.TetromnoActuel.Bas();
