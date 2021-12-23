@@ -51,9 +51,7 @@ public class Interface extends JFrame {
 	private void KeyPressed(KeyEvent evt) {
 		
 		 if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
-			 
-			 System.out.println("ok");
-			 
+			 			 
 			 p.RotationTetromino();
 			 dessinerPuit(contentPane.getGraphics());
 		 }

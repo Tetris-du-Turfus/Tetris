@@ -12,12 +12,17 @@ public class Puit {
 	protected int dimGrilleX=14;
 	protected int dimGrilleY=24;
 	
+	protected int repereX;
+	protected int repereY ;
+	
 	protected Tetromino TetromnoActuel;
 	
 	public Puit(int positionXGrille, int positionYGrille,int tailleCase) {
 		super();
 		this.positionXGrille = positionXGrille;
 		this.positionYGrille = positionYGrille;
+		this.repereX = 5;
+		this.repereY = 0 ;
 		
 		this.grille = new ObjetGraphique[dimGrilleX][dimGrilleY];
 		for (int i = 0; i <dimGrilleX; i++) {
@@ -35,10 +40,10 @@ public class Puit {
 	
 	public void AjouterTetromino(Tetromino t) {
 		this.TetromnoActuel=t;
-		this.TetromnoActuel.setRepere(5, 0);
+		this.TetromnoActuel.setRepere(this.repereX, this.repereY);
 		for(int i=0;i<4;i++) {
 			for (int j = 0; j < 4; j++) {
-				this.grille[i+5][j].setCouleur(t.getObjetGraphique(i, j).getCouleur());
+				this.grille[i+this.repereX][j+this.repereY].setCouleur(t.getObjetGraphique(i, j).getCouleur());
 			}
 		}
 	}
@@ -53,6 +58,7 @@ public class Puit {
 				}
 			}
 		}
+		this.repereY ++ ;
 		this.TetromnoActuel.Bas();
 	}
 	
@@ -67,6 +73,7 @@ public class Puit {
 				}
 			}
 		}
+		this.repereX -- ;
 		this.TetromnoActuel.Gauche();
 	}
 	
@@ -82,6 +89,7 @@ public class Puit {
 				}
 			}
 		}
+		this.repereX ++ ;
 		this.TetromnoActuel.Droite();
 	}
 	
@@ -170,6 +178,12 @@ public class Puit {
 		this.TetromnoActuel.setPosition((position+1)%4);
 		
 		//MAJ grille
+		for(int i=0;i<4;i++) {
+			for (int j = 0; j < 4; j++) {
+				this.grille[i+this.repereX][j+this.repereY].setCouleur(this.TetromnoActuel.getObjetGraphique(i, j).getCouleur());
+			}
+		}
+		
 		
 		
 	}
