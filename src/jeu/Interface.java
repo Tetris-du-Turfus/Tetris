@@ -55,6 +55,29 @@ public class Interface extends JFrame {
 			 p.RotationTetromino();
 			 dessinerPuit(contentPane.getGraphics());
 		 }
+		 if (evt.getKeyCode() == KeyEvent.VK_DOWN) {
+ 			 
+			 int depFait=p.déplacementBasPossible();
+				if(depFait==1)
+					p.déplacementBas();
+			 dessinerPuit(contentPane.getGraphics());
+		 }
+		 
+		 if (evt.getKeyCode() == KeyEvent.VK_LEFT) {
+			 int depFait=p.déplacementGauchePossible();
+				if(depFait==1)
+					p.déplacementGauche();
+			 dessinerPuit(contentPane.getGraphics());
+		 }
+		 
+		 if (evt.getKeyCode() == KeyEvent.VK_RIGHT) {
+			 int depFait=p.déplacementDroitePossible();
+				if(depFait==1)
+					p.déplacementDroite();
+			 dessinerPuit(contentPane.getGraphics());
+		 }
+		 
+		 
 	}
 	
 	public void dessinerPuit(Graphics g) {
@@ -72,7 +95,7 @@ public class Interface extends JFrame {
 		 //Puit p=new Puit(10,10,50)
 		 p.Afficher(bufferGraphics);
 		 // On afficher l'image mémoire à l'écran, on choisit où afficher l'image 
-		 g.drawImage(offscreen,50,50,null);
+		 g.drawImage(offscreen,100,10,null);
 	}
 	
 	public void dessinerTetromino(Graphics g)
@@ -140,7 +163,7 @@ public class Interface extends JFrame {
 		this.getContentPane().setBackground(Color.WHITE);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 560, 525);
 		
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -164,17 +187,12 @@ public class Interface extends JFrame {
 				//Objt.Gauche();
 				
 				dessinerPuit(contentPane.getGraphics());
-				int depFait=p.DeplacementDroitePossible();
-				if(depFait==1)
-					p.déplacementDroite();
-					
-				/*int depFait=p.DeplacementGauchePossible();
-				if(depFait==1)
-					p.déplacementGauche();
-				*/
-				/*int depFait=p.DeplacementBasPossible();
-				if(depFait==1)
-					p.déplacementBas();
+				/*
+					*/
+				
+				
+				
+				/*
 				*/
 			}
 		});

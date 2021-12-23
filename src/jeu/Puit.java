@@ -93,14 +93,14 @@ public class Puit {
 		this.TetromnoActuel.Droite();
 	}
 	
-	public int DeplacementBasPossible() {
+	public int déplacementBasPossible() {
 		int sortie=1;
 		
 		for(int i=0; i<4; i++) {
 			for (int j = 3; j > -1; j--) {
-				if(this.TetromnoActuel.getObjetGraphique(i, j).getCouleur()!=0 && j>0) {
+				if(this.TetromnoActuel.getObjetGraphique(i, j).getCouleur()!=0 && j<3) {
 					
-					int val =this.TetromnoActuel.getObjetGraphique(i, j).getCouleur()-this.TetromnoActuel.getObjetGraphique(i, j-1).getCouleur()+
+					int val =this.TetromnoActuel.getObjetGraphique(i, j).getCouleur()-this.TetromnoActuel.getObjetGraphique(i, j+1).getCouleur()+
 							grille[TetromnoActuel.getObjetGraphique(i, j).getX()][TetromnoActuel.getObjetGraphique(i, j).getY()+1].getCouleur();
 					
 					if(val>18) {
@@ -113,17 +113,16 @@ public class Puit {
 	}
 	
 	//retourne 1 si le déplacement est possible sinon 0
-	public int DeplacementGauchePossible() {
+	public int déplacementGauchePossible() {
 		int sortie=1;
 		
 		for(int i=0; i<4; i++) {
 			for (int j = 0; j < 4; j++) {
-				if(this.TetromnoActuel.getObjetGraphique(i, j).getCouleur()!=0) {
-					grille[TetromnoActuel.getObjetGraphique(i, j).getX()][TetromnoActuel.getObjetGraphique(i, j).getY()].setCouleur(0);
-					grille[TetromnoActuel.getObjetGraphique(i, j).getX()-1][TetromnoActuel.getObjetGraphique(i, j).getY()].setCouleur(this.TetromnoActuel.getObjetGraphique(i, j).getCouleur()+
-							grille[TetromnoActuel.getObjetGraphique(i, j).getX()-1][TetromnoActuel.getObjetGraphique(i, j).getY()].getCouleur());
+				if(this.TetromnoActuel.getObjetGraphique(i, j).getCouleur()!=0 && i>0) {
+					int val=this.TetromnoActuel.getObjetGraphique(i, j).getCouleur()-this.TetromnoActuel.getObjetGraphique(i-1, j).getCouleur()+
+							grille[TetromnoActuel.getObjetGraphique(i, j).getX()-1][TetromnoActuel.getObjetGraphique(i, j).getY()].getCouleur();
 					
-					if(grille[TetromnoActuel.getObjetGraphique(i, j).getX()-1][TetromnoActuel.getObjetGraphique(i, j).getY()].getCouleur()>18) {
+					if(val>18) {
 						sortie=0;
 					}
 				}
@@ -133,18 +132,18 @@ public class Puit {
 	}
 	
 	//retourne 1 si le déplacement est possible sinon 0
-	public int DeplacementDroitePossible() {
+	public int déplacementDroitePossible() {
 		int sortie=1;
 		
 		for(int i=3; i>-1; i--) {
 			for (int j = 0; j < 4; j++) {
-				if(this.TetromnoActuel.getObjetGraphique(i, j).getCouleur()!=0) {
-					grille[TetromnoActuel.getObjetGraphique(i, j).getX()][TetromnoActuel.getObjetGraphique(i, j).getY()].setCouleur(0);
-					grille[TetromnoActuel.getObjetGraphique(i, j).getX()+1][TetromnoActuel.getObjetGraphique(i, j).getY()].setCouleur(this.TetromnoActuel.getObjetGraphique(i, j).getCouleur()+
-							grille[TetromnoActuel.getObjetGraphique(i, j).getX()+1][TetromnoActuel.getObjetGraphique(i, j).getY()].getCouleur());
+				if(this.TetromnoActuel.getObjetGraphique(i, j).getCouleur()!=0 && i<3) {
+					int val=this.TetromnoActuel.getObjetGraphique(i, j).getCouleur()-this.TetromnoActuel.getObjetGraphique(i+1, j).getCouleur()+
+							grille[TetromnoActuel.getObjetGraphique(i, j).getX()+1][TetromnoActuel.getObjetGraphique(i, j).getY()].getCouleur();
 					
-					if(grille[TetromnoActuel.getObjetGraphique(i, j).getX()+1][TetromnoActuel.getObjetGraphique(i, j).getY()].getCouleur()>18) {
+					if(val>18) {
 						sortie=0;
+						
 					}
 				}
 			}
