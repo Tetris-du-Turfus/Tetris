@@ -164,18 +164,18 @@ public class Interface extends JFrame {
 				//Objt.Gauche();
 				
 				dessinerPuit(contentPane.getGraphics());
-				/*int depFait=p.DeplacementDroitePossible();
+				int depFait=p.DeplacementDroitePossible();
 				if(depFait==1)
 					p.déplacementDroite();
-					*/
+					
 				/*int depFait=p.DeplacementGauchePossible();
 				if(depFait==1)
 					p.déplacementGauche();
 				*/
-				int depFait=p.DeplacementBasPossible();
+				/*int depFait=p.DeplacementBasPossible();
 				if(depFait==1)
 					p.déplacementBas();
-				
+				*/
 			}
 		});
 		btnNewButton.setBounds(104, 153, 85, 21);

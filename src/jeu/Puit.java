@@ -98,12 +98,12 @@ public class Puit {
 		
 		for(int i=0; i<4; i++) {
 			for (int j = 3; j > -1; j--) {
-				if(this.TetromnoActuel.getObjetGraphique(i, j).getCouleur()!=0) {
-					grille[TetromnoActuel.getObjetGraphique(i, j).getX()][TetromnoActuel.getObjetGraphique(i, j).getY()].setCouleur(0);
-					grille[TetromnoActuel.getObjetGraphique(i, j).getX()][TetromnoActuel.getObjetGraphique(i, j).getY()+1].setCouleur(this.TetromnoActuel.getObjetGraphique(i, j).getCouleur()+
-							grille[TetromnoActuel.getObjetGraphique(i, j).getX()][TetromnoActuel.getObjetGraphique(i, j).getY()+1].getCouleur());
+				if(this.TetromnoActuel.getObjetGraphique(i, j).getCouleur()!=0 && j>0) {
 					
-					if(grille[TetromnoActuel.getObjetGraphique(i, j).getX()][TetromnoActuel.getObjetGraphique(i, j).getY()+1].getCouleur()>18) {
+					int val =this.TetromnoActuel.getObjetGraphique(i, j).getCouleur()-this.TetromnoActuel.getObjetGraphique(i, j-1).getCouleur()+
+							grille[TetromnoActuel.getObjetGraphique(i, j).getX()][TetromnoActuel.getObjetGraphique(i, j).getY()+1].getCouleur();
+					
+					if(val>18) {
 						sortie=0;
 					}
 				}
@@ -180,7 +180,7 @@ public class Puit {
 		//MAJ grille
 		for(int i=0;i<4;i++) {
 			for (int j = 0; j < 4; j++) {
-				this.grille[i+this.repereX][j+this.repereY].setCouleur(this.TetromnoActuel.getObjetGraphique(i, j).getCouleur());
+				this.grille[TetromnoActuel.getObjetGraphique(i, j).getX()][TetromnoActuel.getObjetGraphique(i, j).getY()].setCouleur(this.TetromnoActuel.getObjetGraphique(i, j).getCouleur());
 			}
 		}
 		
