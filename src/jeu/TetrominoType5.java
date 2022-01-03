@@ -8,7 +8,7 @@ public class TetrominoType5 extends Tetromino{
 	public TetrominoType5(int position,int tailleCase) {
 		super(5, position);
 		// TODO Auto-generated constructor stub
-		int couleur =10;
+		int couleur =14;
 		this.tab = new ObjetGraphique[4][4][4];
 		//position 0
 		
