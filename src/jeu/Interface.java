@@ -37,7 +37,8 @@ public class Interface extends JFrame {
 	int a;
 	TetrominoType7 Objt;
 	Puit p ;
-	
+	Tetromino tetrominoActuel;
+	Tetromino tetrominoSuivant;
 	
 	private Timer monTimer;
 	private TimerTask task;
@@ -129,31 +130,7 @@ public class Interface extends JFrame {
 	{
 	 Graphics bufferGraphics;
 	 Image offscreen;
-	 Random random = new Random();
-	 int randomTetromino = random.nextInt(6) + 1;
-
-
-	 //int randomTetromino = (int)Math.random()*6 + 1 ;
-	 System.out.println(randomTetromino);
-	 Tetromino prochainTetromino = null;
 	 
-	 switch (randomTetromino) {
-	 	case 1 : prochainTetromino = new TetrominoType1(0,20);
-	 			 break ;
-	 	case 2 : prochainTetromino = new TetrominoType2(0,20);
-		 		 break ;
-	 	case 3 : prochainTetromino = new TetrominoType3(0,20);
-		 		 break ;
-	 	case 4 : prochainTetromino = new TetrominoType4(0,20);
-		 		 break ;
-	 	case 5 : prochainTetromino = new TetrominoType5(0,20);
-		 		 break ;
-	 	case 6 : prochainTetromino = new TetrominoType6(0,20);
-		 		 break ;
-	 	case 7 : prochainTetromino = new TetrominoType7(0,20);
-		 		 break ;
-	 	
-	 }
 	 
 	 // On crée une image en mémoire de la taille du ContentPane, on peut choisir la taille que l'on souhaite
 	 offscreen = createImage(100,100);
@@ -181,13 +158,44 @@ public class Interface extends JFrame {
 	 
 	 // on dessine notre objet au sein de notre image
 	 
-	 prochainTetromino.Afficher(bufferGraphics);
+	 tetrominoSuivant.Afficher(bufferGraphics);
 	 
 	 
 	 // On afficher l'image mémoire à l'écran, on choisit où afficher l'image 
 	 g.drawImage(offscreen,400,10,null);
 	}
 	
+	public Tetromino tirageTetromino() {
+		Random random = new Random();
+		int randomTetromino = random.nextInt(6) + 1;
+		Tetromino prochainTetromino = null;
+		 
+		 switch (randomTetromino) {
+		 	case 1 : prochainTetromino = new TetrominoType1(0,20);
+		 			 break ;
+		 	case 2 : prochainTetromino = new TetrominoType2(0,20);
+			 		 break ;
+		 	case 3 : prochainTetromino = new TetrominoType3(0,20);
+			 		 break ;
+		 	case 4 : prochainTetromino = new TetrominoType4(0,20);
+			 		 break ;
+		 	case 5 : prochainTetromino = new TetrominoType5(0,20);
+			 		 break ;
+		 	case 6 : prochainTetromino = new TetrominoType6(0,20);
+			 		 break ;
+		 	case 7 : prochainTetromino = new TetrominoType7(0,20);
+			 		 break ;
+		 	
+		 }
+		 return prochainTetromino;
+	}
+	
+	public void ChangementTetromino()
+	{
+		tetrominoActuel=tetrominoSuivant;
+		p.AjouterTetromino(tetrominoActuel);
+		tetrominoSuivant=tirageTetromino();
+	}
 	public void dessiner(Graphics g)
 	{
 	 Graphics bufferGraphics;
@@ -217,7 +225,10 @@ public class Interface extends JFrame {
 		 int depFait=p.déplacementBasPossible();
 			if(depFait==1)
 				p.déplacementBas();
+			else
+				ChangementTetromino();
 		 dessinerPuit(contentPane.getGraphics());
+		 
 		}
 	
 	/**
@@ -225,10 +236,10 @@ public class Interface extends JFrame {
 	 */
 	public Interface() {
 		
-		
-		Objt=new TetrominoType7(0, 20);
+		tetrominoActuel=tirageTetromino();
+		tetrominoSuivant=tirageTetromino();
 		p = new Puit(10,10,20);
-		p.AjouterTetromino(Objt);
+		p.AjouterTetromino(tetrominoActuel);
 		contentPane = new JPanel();
 		
 		contentPane.setFocusable(true);
@@ -267,7 +278,7 @@ public class Interface extends JFrame {
 				//Objt.Gauche();
 				
 				dessinerPuit(contentPane.getGraphics());
-				dessinerTetrominoADroite(getGraphics());
+				dessinerTetrominoADroite(contentPane.getGraphics());
 				monTimer = new Timer();
 				task = new TimerTask() {
 				 public void run() {
