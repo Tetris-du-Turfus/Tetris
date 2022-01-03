@@ -186,6 +186,26 @@ public class Puit {
 		
 		
 	}
+	
+	//retourne 1 si le déplacement est possible sinon 0
+		public int RotationPossible() {
+			int sortie=1;
+			int position = this.TetromnoActuel.getPosition();
+			for(int i=0; i < 4; i++) {
+				for (int j = 0; j < 4; j++) {
+					if(this.grille[TetromnoActuel.getObjetGraphique(i, j).getX()][TetromnoActuel.getObjetGraphique(i, j).getY()].getCouleur()!=0 ) {
+						int val=this.grille[TetromnoActuel.getObjetGraphique(i, j).getX()][TetromnoActuel.getObjetGraphique(i, j).getY()].getCouleur()+
+								this.TetromnoActuel.getObjetGraphique(i, j,(position+1)%4).getCouleur()-this.TetromnoActuel.getObjetGraphique(i, j).getCouleur();
+						
+						if(val>18) {
+							sortie=0;
+							
+						}
+					}
+				}
+			}
+			return sortie;
+		}
 
 
 }
