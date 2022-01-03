@@ -24,6 +24,10 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
 
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.Date;
+
 
 public class Interface extends JFrame {
 
@@ -32,6 +36,9 @@ public class Interface extends JFrame {
 	int a;
 	TetrominoType7 Objt;
 	Puit p ;
+	
+	private Timer monTimer;
+	private TimerTask task;
 	/**
 	 * Launch the application.
 	 */
@@ -143,10 +150,19 @@ public class Interface extends JFrame {
 	 g.drawImage(offscreen,50,50,null);
 	}
 	
+	private void ticTimer() {
+		 int depFait=p.déplacementBasPossible();
+			if(depFait==1)
+				p.déplacementBas();
+		 dessinerPuit(contentPane.getGraphics());
+		}
+	
 	/**
 	 * Create the frame.
 	 */
 	public Interface() {
+		
+		
 		Objt=new TetrominoType7(0, 20);
 		p = new Puit(10,10,20);
 		p.AjouterTetromino(Objt);
@@ -188,15 +204,16 @@ public class Interface extends JFrame {
 				//Objt.Gauche();
 				
 				dessinerPuit(contentPane.getGraphics());
-				/*
-					*/
-				
-				
-				
-				/*
-				*/
+				monTimer = new Timer();
+				task = new TimerTask() {
+				 public void run() {
+				 ticTimer();
+				 }
+				};
+				monTimer.schedule(task, new Date(), 1000);
 			}
 		});
+		
 		btnNewButton.setBounds(104, 153, 85, 21);
 		contentPane.add(btnNewButton);
 		
