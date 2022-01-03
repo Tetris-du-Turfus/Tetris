@@ -27,6 +27,7 @@ import java.awt.event.ActionEvent;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.Date;
+import java.util.Random;
 
 
 public class Interface extends JFrame {
@@ -36,6 +37,7 @@ public class Interface extends JFrame {
 	int a;
 	TetrominoType7 Objt;
 	Puit p ;
+	
 	
 	private Timer monTimer;
 	private TimerTask task;
@@ -123,7 +125,68 @@ public class Interface extends JFrame {
 	 // On afficher l'image mémoire à l'écran, on choisit où afficher l'image 
 	 g.drawImage(offscreen,50,50,null);
 	}
+	public void dessinerTetrominoADroite(Graphics g)
+	{
+	 Graphics bufferGraphics;
+	 Image offscreen;
+	 Random random = new Random();
+	 int randomTetromino = random.nextInt(6) + 1;
+
+
+	 //int randomTetromino = (int)Math.random()*6 + 1 ;
+	 System.out.println(randomTetromino);
+	 Tetromino prochainTetromino = null;
+	 
+	 switch (randomTetromino) {
+	 	case 1 : prochainTetromino = new TetrominoType1(0,20);
+	 			 break ;
+	 	case 2 : prochainTetromino = new TetrominoType2(0,20);
+		 		 break ;
+	 	case 3 : prochainTetromino = new TetrominoType3(0,20);
+		 		 break ;
+	 	case 4 : prochainTetromino = new TetrominoType4(0,20);
+		 		 break ;
+	 	case 5 : prochainTetromino = new TetrominoType5(0,20);
+		 		 break ;
+	 	case 6 : prochainTetromino = new TetrominoType6(0,20);
+		 		 break ;
+	 	case 7 : prochainTetromino = new TetrominoType7(0,20);
+		 		 break ;
+	 	
+	 }
+	 
+	 // On crée une image en mémoire de la taille du ContentPane, on peut choisir la taille que l'on souhaite
+	 offscreen = createImage(100,100);
+	 // On récupère l'objet de type Graphics permettant de dessiner dans cette image
+	 bufferGraphics = offscreen.getGraphics();
+	 // On colore le fond de l'image en blanc
+	 bufferGraphics.setColor(Color.GRAY);
+	 bufferGraphics.fillRect(0,0,this.getContentPane().getWidth(),this.getContentPane().getHeight()); 
+	 /*
+	 for (int i = 0; i < 4; i++) {
+			
+			g.setColor(Color.WHITE);
+			g.drawLine(i*20,0,i*20,80);
+	}
+	 
+	 // test 
 	
+		g.setColor(Color.WHITE);
+		g.drawLine((dimGrilleX-2)*this.grille[0][0].tailleCase,0,(dimGrilleX-2)*this.grille[0][0].tailleCase,(dimGrilleY-2)*this.grille[0][0].tailleCase);
+		for (int j = 0; j < dimGrilleY-1; j++) {
+			g.setColor(Color.WHITE);
+			g.drawLine(2*this.grille[0][0].tailleCase,j*this.grille[0][0].tailleCase,(dimGrilleX-2)*this.grille[0][0].tailleCase,j*this.grille[0][0].tailleCase);
+		}
+	*/
+	 
+	 // on dessine notre objet au sein de notre image
+	 
+	 prochainTetromino.Afficher(bufferGraphics);
+	 
+	 
+	 // On afficher l'image mémoire à l'écran, on choisit où afficher l'image 
+	 g.drawImage(offscreen,400,10,null);
+	}
 	
 	public void dessiner(Graphics g)
 	{
@@ -204,6 +267,7 @@ public class Interface extends JFrame {
 				//Objt.Gauche();
 				
 				dessinerPuit(contentPane.getGraphics());
+				dessinerTetrominoADroite(getGraphics());
 				monTimer = new Timer();
 				task = new TimerTask() {
 				 public void run() {
