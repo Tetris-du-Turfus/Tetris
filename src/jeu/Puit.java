@@ -58,7 +58,6 @@ public class Puit {
 				}
 			}
 		}
-		this.repereY ++ ;
 		this.TetromnoActuel.Bas();
 	}
 	
@@ -73,7 +72,6 @@ public class Puit {
 				}
 			}
 		}
-		this.repereX -- ;
 		this.TetromnoActuel.Gauche();
 	}
 	
@@ -89,7 +87,6 @@ public class Puit {
 				}
 			}
 		}
-		this.repereX ++ ;
 		this.TetromnoActuel.Droite();
 	}
 	
@@ -179,7 +176,10 @@ public class Puit {
 		//MAJ grille
 		for(int i=0;i<4;i++) {
 			for (int j = 0; j < 4; j++) {
-				this.grille[TetromnoActuel.getObjetGraphique(i, j).getX()][TetromnoActuel.getObjetGraphique(i, j).getY()].setCouleur(this.TetromnoActuel.getObjetGraphique(i, j).getCouleur());
+				if(this.TetromnoActuel.getObjetGraphique(i, j).getCouleur()!=0 || this.grille[TetromnoActuel.getObjetGraphique(i, j).getX()][TetromnoActuel.getObjetGraphique(i, j).getY()].getCouleur()!=0)
+					this.grille[TetromnoActuel.getObjetGraphique(i, j).getX()][TetromnoActuel.getObjetGraphique(i, j).getY()].setCouleur(
+							this.TetromnoActuel.getObjetGraphique(i, j).getCouleur()-this.TetromnoActuel.getObjetGraphique(i, j,position).getCouleur()+
+							grille[TetromnoActuel.getObjetGraphique(i, j).getX()][TetromnoActuel.getObjetGraphique(i, j).getY()].getCouleur());
 			}
 		}
 		
@@ -205,6 +205,31 @@ public class Puit {
 				}
 			}
 			return sortie;
+		}
+		
+		public int LigneComplete() {
+			int ligneComplete=0;
+			for (int i = 0; i < dimGrilleY-2; i++) {
+				int n=0;
+				for (int j = 2; j < dimGrilleX-2; j++) {
+					if(this.grille[j][i].getCouleur()>0)
+						n++;
+				}
+				if(n==dimGrilleX-4)
+					ligneComplete=i;
+				
+			}
+			return ligneComplete;
+		}
+		
+		public void SuppressionLigne(int Ligne) {
+			if(Ligne!=0) {
+				for (int i = Ligne; i > 1; i--) {
+					for (int j = 2; j < dimGrilleX-2; j++) {
+						this.grille[j][i].setCouleur(this.grille[j][i-1].getCouleur());
+					}
+				}
+			}
 		}
 
 
