@@ -38,15 +38,6 @@ public class Puit {
 		
 	}
 	
-	public void AjouterTetromino(Tetromino t) {
-		this.TetromnoActuel=t;
-		this.TetromnoActuel.setRepere(this.repereX, this.repereY);
-		for(int i=0;i<4;i++) {
-			for (int j = 0; j < 4; j++) {
-				this.grille[i+this.repereX][j+this.repereY].setCouleur(t.getObjetGraphique(i, j).getCouleur());
-			}
-		}
-	}
 	public void déplacementBas() {
 		//tester avant si le déplacement est possible
 		for(int i=0; i<4; i++) {
@@ -95,15 +86,27 @@ public class Puit {
 		
 		for(int i=0; i<4; i++) {
 			for (int j = 3; j > -1; j--) {
-				if(this.TetromnoActuel.getObjetGraphique(i, j).getCouleur()!=0 && j<3) {
-					
-					int val =this.TetromnoActuel.getObjetGraphique(i, j).getCouleur()-this.TetromnoActuel.getObjetGraphique(i, j+1).getCouleur()+
-							grille[TetromnoActuel.getObjetGraphique(i, j).getX()][TetromnoActuel.getObjetGraphique(i, j).getY()+1].getCouleur();
-					
-					if(val>18) {
-						sortie=0;
+				if(this.TetromnoActuel.getObjetGraphique(i, j).getCouleur()!=0 ) {
+					if(j<3) {
+						int val =this.TetromnoActuel.getObjetGraphique(i, j).getCouleur()-this.TetromnoActuel.getObjetGraphique(i, j+1).getCouleur()+
+								grille[TetromnoActuel.getObjetGraphique(i, j).getX()][TetromnoActuel.getObjetGraphique(i, j).getY()+1].getCouleur();
+						
+						if(val>18) {
+							sortie=0;
+						}
 					}
+					//j=3
+					else {
+						int val =this.TetromnoActuel.getObjetGraphique(i, j).getCouleur()+
+								grille[TetromnoActuel.getObjetGraphique(i, j).getX()][TetromnoActuel.getObjetGraphique(i, j).getY()+1].getCouleur();
+						
+						if(val>18) {
+							sortie=0;
+						}
+					}
+					
 				}
+				
 			}
 		}
 		return sortie;
@@ -115,13 +118,25 @@ public class Puit {
 		
 		for(int i=0; i<4; i++) {
 			for (int j = 0; j < 4; j++) {
-				if(this.TetromnoActuel.getObjetGraphique(i, j).getCouleur()!=0 && i>0) {
-					int val=this.TetromnoActuel.getObjetGraphique(i, j).getCouleur()-this.TetromnoActuel.getObjetGraphique(i-1, j).getCouleur()+
-							grille[TetromnoActuel.getObjetGraphique(i, j).getX()-1][TetromnoActuel.getObjetGraphique(i, j).getY()].getCouleur();
-					
-					if(val>18) {
-						sortie=0;
+				if(this.TetromnoActuel.getObjetGraphique(i, j).getCouleur()!=0) {
+					if(i>0) {
+						int val=this.TetromnoActuel.getObjetGraphique(i, j).getCouleur()-this.TetromnoActuel.getObjetGraphique(i-1, j).getCouleur()+
+								grille[TetromnoActuel.getObjetGraphique(i, j).getX()-1][TetromnoActuel.getObjetGraphique(i, j).getY()].getCouleur();
+						
+						if(val>18) {
+							sortie=0;
+						}
 					}
+					//i=0
+					else {
+						int val=this.TetromnoActuel.getObjetGraphique(i, j).getCouleur()+
+								grille[TetromnoActuel.getObjetGraphique(i, j).getX()-1][TetromnoActuel.getObjetGraphique(i, j).getY()].getCouleur();
+						
+						if(val>18) {
+							sortie=0;
+						}
+					}
+					
 				}
 			}
 		}
@@ -134,14 +149,26 @@ public class Puit {
 		
 		for(int i=3; i>-1; i--) {
 			for (int j = 0; j < 4; j++) {
-				if(this.TetromnoActuel.getObjetGraphique(i, j).getCouleur()!=0 && i<3) {
-					int val=this.TetromnoActuel.getObjetGraphique(i, j).getCouleur()-this.TetromnoActuel.getObjetGraphique(i+1, j).getCouleur()+
-							grille[TetromnoActuel.getObjetGraphique(i, j).getX()+1][TetromnoActuel.getObjetGraphique(i, j).getY()].getCouleur();
-					
-					if(val>18) {
-						sortie=0;
+				if(this.TetromnoActuel.getObjetGraphique(i, j).getCouleur()!=0 ) {
+					if(i<3) {
+						int val=this.TetromnoActuel.getObjetGraphique(i, j).getCouleur()-this.TetromnoActuel.getObjetGraphique(i+1, j).getCouleur()+
+								grille[TetromnoActuel.getObjetGraphique(i, j).getX()+1][TetromnoActuel.getObjetGraphique(i, j).getY()].getCouleur();
 						
+						if(val>18) {
+							sortie=0;
+							
+						}
 					}
+					//i=3
+					else {
+						int val=this.TetromnoActuel.getObjetGraphique(i, j).getCouleur()+
+								grille[TetromnoActuel.getObjetGraphique(i, j).getX()+1][TetromnoActuel.getObjetGraphique(i, j).getY()].getCouleur();
+						
+						if(val>18) {
+							sortie=0;
+						}
+					}
+					
 				}
 			}
 		}
@@ -230,6 +257,31 @@ public class Puit {
 					}
 				}
 			}
+		}
+		
+		public void AjouterTetromino(Tetromino t) {
+			this.TetromnoActuel=t;
+			this.TetromnoActuel.setRepere(this.repereX, this.repereY);
+			for(int i=0;i<4;i++) {
+				for (int j = 0; j < 4; j++) {
+					this.grille[i+this.repereX][j+this.repereY].setCouleur(t.getObjetGraphique(i, j).getCouleur());
+				}
+			}
+		}
+		
+		/**
+		 * Fonction qui indique si l'on peut continuer à jouer ousi la partie est perdu
+		 * @return 0 si la partie est perdu
+		 */
+		public int partiePerdu()
+		{
+			for(int i=0;i<4;i++) {
+				for (int j = 0; j < 4; j++) {
+					if(this.grille[i+this.repereX][j+this.repereY].getCouleur()!=0)
+						return 0;
+				}
+			}
+			return 1;
 		}
 
 

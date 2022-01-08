@@ -133,19 +133,20 @@ public class Interface extends JFrame {
 	 
 	 
 	 // On crée une image en mémoire de la taille du ContentPane, on peut choisir la taille que l'on souhaite
-	 offscreen = createImage(100,100);
+	 offscreen = createImage(80,80);
 	 // On récupère l'objet de type Graphics permettant de dessiner dans cette image
 	 bufferGraphics = offscreen.getGraphics();
 	 // On colore le fond de l'image en blanc
 	 bufferGraphics.setColor(Color.GRAY);
 	 bufferGraphics.fillRect(0,0,this.getContentPane().getWidth(),this.getContentPane().getHeight()); 
-	 /*
+	 
 	 for (int i = 0; i < 4; i++) {
 			
-			g.setColor(Color.WHITE);
-			g.drawLine(i*20,0,i*20,80);
+		 bufferGraphics.setColor(Color.WHITE);
+		 bufferGraphics.drawLine(i*20,0,i*20,80);
+		 bufferGraphics.drawLine(0,i*20,80,i*20);
 	}
-	 
+	 /*
 	 // test 
 	
 		g.setColor(Color.WHITE);
@@ -160,14 +161,13 @@ public class Interface extends JFrame {
 	 
 	 tetrominoSuivant.Afficher(bufferGraphics);
 	 
-	 
 	 // On afficher l'image mémoire à l'écran, on choisit où afficher l'image 
 	 g.drawImage(offscreen,400,10,null);
 	}
 	
 	public Tetromino tirageTetromino() {
 		Random random = new Random();
-		int randomTetromino = random.nextInt(6) + 1;
+		int randomTetromino = random.nextInt(7) + 1;
 		Tetromino prochainTetromino = null;
 		 
 		 switch (randomTetromino) {
@@ -223,14 +223,17 @@ public class Interface extends JFrame {
 	 g.drawImage(offscreen,50,50,null);
 	}
 	
-	private void ticTimer() {
+	private int ticTimer() {
 		 int depFait=p.déplacementBasPossible();
 			if(depFait==1)
 				p.déplacementBas();
 			else
-				ChangementTetromino();
+				if(p.partiePerdu()==1)
+					ChangementTetromino();
+				else
+					return 0;
 		 dessinerPuit(contentPane.getGraphics());
-		 
+		 return 1;
 		}
 	
 	/**
@@ -284,7 +287,9 @@ public class Interface extends JFrame {
 				monTimer = new Timer();
 				task = new TimerTask() {
 				 public void run() {
-				 ticTimer();
+				 if (ticTimer()==0)
+					 monTimer.cancel();
+				 // afficher un message pour dire que la partie est perdu
 				 }
 				};
 				monTimer.schedule(task, new Date(), 1000);
