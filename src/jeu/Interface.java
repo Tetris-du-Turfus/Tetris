@@ -32,13 +32,14 @@ import java.util.Random;
 
 public class Interface extends JFrame {
 
-
 	private JPanel contentPane;
+	int vitesse=1000;
 	int a;
 	TetrominoType7 Objt;
 	Puit p ;
 	Tetromino tetrominoActuel;
 	Tetromino tetrominoSuivant;
+	int Score;
 	
 	private Timer monTimer;
 	private TimerTask task;
@@ -126,6 +127,7 @@ public class Interface extends JFrame {
 	 // On afficher l'image mémoire à l'écran, on choisit où afficher l'image 
 	 g.drawImage(offscreen,50,50,null);
 	}
+	
 	public void dessinerTetrominoADroite(Graphics g)
 	{
 	 Graphics bufferGraphics;
@@ -165,6 +167,22 @@ public class Interface extends JFrame {
 	 g.drawImage(offscreen,400,10,null);
 	}
 	
+	
+	public void dessinerScore(Graphics g)
+	{
+	 Graphics bufferGraphics;
+	 Image offscreen;	 
+	 // On crée une image en mémoire de la taille du ContentPane, on peut choisir la taille que l'on souhaite
+	 offscreen = createImage(100,100);
+	 // On récupère l'objet de type Graphics permettant de dessiner dans cette image
+	 bufferGraphics = offscreen.getGraphics();
+	 // On colore le fond de l'image en blanc
+	 bufferGraphics.setColor(Color.RED);
+	 bufferGraphics.drawString(String.valueOf(Score),20,20);	 
+	 // On afficher l'image mémoire à l'écran, on choisit où afficher l'image 
+	 g.drawImage(offscreen,10,10,null);
+	}
+	
 	public Tetromino tirageTetromino() {
 		Random random = new Random();
 		int randomTetromino = random.nextInt(7) + 1;
@@ -190,17 +208,24 @@ public class Interface extends JFrame {
 		 return prochainTetromino;
 	}
 	
-	public void ChangementTetromino()
+	public void ChangementTetromino(Graphics g)
 	{
 		for (int i = tetrominoActuel.getObjetGraphique(0, 0).getY(); i < tetrominoActuel.getObjetGraphique(3, 3).getY(); i++) {
-			if(p.LigneComplete(i)==1)
+			if(p.LigneComplete(i)==1) {
 				p.SuppressionLigne(i);
+				Score+=100;
+				dessinerScore(g);
+			}
 		}
 		tetrominoActuel=tetrominoSuivant;
 		p.AjouterTetromino(tetrominoActuel);
 		tetrominoSuivant=tirageTetromino();
+		Score+=20;
+		dessinerScore(g);
 		dessinerTetrominoADroite(contentPane.getGraphics());
 	}
+	
+	
 	public void dessiner(Graphics g)
 	{
 	 Graphics bufferGraphics;
@@ -226,17 +251,18 @@ public class Interface extends JFrame {
 	 g.drawImage(offscreen,50,50,null);
 	}
 	
-	private int ticTimer() {
-		 int depFait=p.déplacementBasPossible();
+	private int ticTimer(Graphics g) {
+		int depFait=p.déplacementBasPossible();
 			if(depFait==1)
 				p.déplacementBas();
 			else
 				if(p.partiePerdu()==1)
-					ChangementTetromino();
+					ChangementTetromino(g);
 				else
 					return 0;
-		 dessinerPuit(contentPane.getGraphics());
-		 return 1;
+		
+		dessinerPuit(contentPane.getGraphics());
+		return 1;
 		}
 	
 	/**
@@ -244,6 +270,7 @@ public class Interface extends JFrame {
 	 */
 	public Interface() {
 		
+		Score=0;
 		tetrominoActuel=tirageTetromino();
 		tetrominoSuivant=tirageTetromino();
 		p = new Puit(10,10,20);
@@ -267,7 +294,8 @@ public class Interface extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-
+		
+		
 		/*
 		//écriture 5
 		a=5;
@@ -284,18 +312,22 @@ public class Interface extends JFrame {
 				//dessiner(contentPane.getGraphics());
 				//dessinerTetromino(contentPane.getGraphics());
 				//Objt.Gauche();
-				
+				dessinerScore(contentPane.getGraphics());
 				dessinerPuit(contentPane.getGraphics());
 				dessinerTetrominoADroite(contentPane.getGraphics());
 				monTimer = new Timer();
 				task = new TimerTask() {
 				 public void run() {
-				 if (ticTimer()==0)
-					 monTimer.cancel();
-				 // afficher un message pour dire que la partie est perdu
+					 if(Score>40) {
+						 vitesse=200;
+					 }
+						
+					 if (ticTimer(contentPane.getGraphics())==0)
+						 monTimer.cancel();
+					 // afficher un message pour dire que la partie est perdu
 				 }
 				};
-				monTimer.schedule(task, new Date(), 1000);
+				monTimer.schedule(task, new Date(), vitesse);
 			}
 		});
 		
@@ -305,7 +337,4 @@ public class Interface extends JFrame {
 		
 		
 	}
-	
-	// comment test
-
 }
