@@ -234,21 +234,27 @@ public class Puit {
 			return sortie;
 		}
 		
-		public int LigneComplete() {
+		/**
+		 * Fonction qui nous donne si une ligne est complete
+		 * @param i : entier qui contient la ligne à regarder 
+		 * @return  1 si si la ligne est complète, 0 sinon 
+		 */
+		public int LigneComplete(int i) {
 			int ligneComplete=0;
-			for (int i = 0; i < dimGrilleY-2; i++) {
-				int n=0;
-				for (int j = 2; j < dimGrilleX-2; j++) {
-					if(this.grille[j][i].getCouleur()>0)
-						n++;
-				}
-				if(n==dimGrilleX-4)
-					ligneComplete=i;
-				
+			int n=0;
+			for (int j = 2; j < dimGrilleX-2; j++) {
+				if(this.grille[j][i].getCouleur()>0)
+					n++;
 			}
+			if(n==dimGrilleX-4)
+				ligneComplete=1;
 			return ligneComplete;
 		}
 		
+		/**
+		 * Supprime une ligne de la grille et décale vers le bas toutes les lignes du dessus
+		 * @param Ligne : entier contenant l'indice de la ligne à supprimer
+		 */
 		public void SuppressionLigne(int Ligne) {
 			if(Ligne!=0) {
 				for (int i = Ligne; i > 1; i--) {

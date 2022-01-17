@@ -192,8 +192,11 @@ public class Interface extends JFrame {
 	
 	public void ChangementTetromino()
 	{
+		for (int i = tetrominoActuel.getObjetGraphique(0, 0).getY(); i < tetrominoActuel.getObjetGraphique(3, 3).getY(); i++) {
+			if(p.LigneComplete(i)==1)
+				p.SuppressionLigne(i);
+		}
 		tetrominoActuel=tetrominoSuivant;
-		p.SuppressionLigne(p.LigneComplete());
 		p.AjouterTetromino(tetrominoActuel);
 		tetrominoSuivant=tirageTetromino();
 		dessinerTetrominoADroite(contentPane.getGraphics());
