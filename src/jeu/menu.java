@@ -53,5 +53,7 @@ public class menu extends JFrame {
 		});
 		panel.add(btnNewButton);
 	}
+	
+	
 
 }
