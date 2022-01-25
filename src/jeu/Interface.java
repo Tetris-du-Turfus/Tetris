@@ -10,7 +10,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import jeu.MonPanel;
 
 import javax.swing.JLabel;
 
@@ -225,7 +224,7 @@ public class Interface extends JFrame {
 		dessinerTetrominoADroite(contentPane.getGraphics());
 	}
 	
-	
+
 	public void dessiner(Graphics g)
 	{
 	 Graphics bufferGraphics;
