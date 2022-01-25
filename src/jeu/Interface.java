@@ -51,6 +51,7 @@ public class Interface extends JFrame {
 				try {
 					Interface frame = new Interface();
 					frame.setVisible(true);
+					frame.setBackground(Color.BLACK);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -147,16 +148,7 @@ public class Interface extends JFrame {
 		 bufferGraphics.drawLine(i*20,0,i*20,80);
 		 bufferGraphics.drawLine(0,i*20,80,i*20);
 	}
-	 /*
-	 // test 
 	
-		g.setColor(Color.WHITE);
-		g.drawLine((dimGrilleX-2)*this.grille[0][0].tailleCase,0,(dimGrilleX-2)*this.grille[0][0].tailleCase,(dimGrilleY-2)*this.grille[0][0].tailleCase);
-		for (int j = 0; j < dimGrilleY-1; j++) {
-			g.setColor(Color.WHITE);
-			g.drawLine(2*this.grille[0][0].tailleCase,j*this.grille[0][0].tailleCase,(dimGrilleX-2)*this.grille[0][0].tailleCase,j*this.grille[0][0].tailleCase);
-		}
-	*/
 	 
 	 // on dessine notre objet au sein de notre image
 	 
@@ -284,8 +276,9 @@ public class Interface extends JFrame {
 				KeyPressed(e);
 			}
 		});
-		
-		this.getContentPane().setBackground(Color.WHITE);
+		contentPane.setBackground(Color.BLACK);
+		this.getContentPane().setBackground(Color.BLACK);
+		//this.setVisible(true);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 560, 525);
