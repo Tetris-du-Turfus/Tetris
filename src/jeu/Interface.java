@@ -15,6 +15,8 @@ import jeu.MonPanel;
 import javax.swing.JLabel;
 
 import java.awt.Image;
+
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -39,6 +41,7 @@ public class Interface extends JFrame {
 	Puit p ;
 	Tetromino tetrominoActuel;
 	Tetromino tetrominoSuivant;
+	
 	int Score;
 	
 	private Timer monTimer;
@@ -51,7 +54,11 @@ public class Interface extends JFrame {
 			public void run() {
 				try {
 					Interface frame = new Interface();
-					frame.setVisible(true);
+					//ImageIcon icon = new ImageIcon("src/jeu/tetris_image.jpg");
+				    //frame.add(new JLabel(icon, JLabel.CENTER));
+				    //frame.pack();
+				    frame.setVisible(true);
+				    
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -60,34 +67,34 @@ public class Interface extends JFrame {
 	}
 	
 	private void KeyPressed(KeyEvent evt) {
-		
-		 if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
-			 int depFait=p.RotationPossible();
-			 if(depFait==1)
-					p.RotationTetromino();
-			 dessinerPuit(contentPane.getGraphics());
-		 }
-		 if (evt.getKeyCode() == KeyEvent.VK_DOWN) {
- 			 
-			 int depFait=p.déplacementBasPossible();
+		int depFait;
+		switch(evt.getKeyCode()) {
+			case KeyEvent.VK_SPACE:
+				depFait=p.RotationPossible();
+				if(depFait==1)
+						p.RotationTetromino();
+				 dessinerPuit(contentPane.getGraphics());
+				 break;
+			case KeyEvent.VK_DOWN:
+				depFait=p.déplacementBasPossible();
 				if(depFait==1)
 					p.déplacementBas();
-			 dessinerPuit(contentPane.getGraphics());
-		 }
-		 
-		 if (evt.getKeyCode() == KeyEvent.VK_LEFT) {
-			 int depFait=p.déplacementGauchePossible();
+				dessinerPuit(contentPane.getGraphics());
+				break;
+			case KeyEvent.VK_LEFT:
+				depFait=p.déplacementGauchePossible();
 				if(depFait==1)
 					p.déplacementGauche();
-			 dessinerPuit(contentPane.getGraphics());
-		 }
-		 
-		 if (evt.getKeyCode() == KeyEvent.VK_RIGHT) {
-			 int depFait=p.déplacementDroitePossible();
+				dessinerPuit(contentPane.getGraphics());
+				break;
+			case KeyEvent.VK_RIGHT:
+				depFait=p.déplacementDroitePossible();
 				if(depFait==1)
 					p.déplacementDroite();
-			 dessinerPuit(contentPane.getGraphics());
-		 }
+				dessinerPuit(contentPane.getGraphics());
+				break;
+				
+		}
 		 
 		 
 	}
@@ -210,8 +217,11 @@ public class Interface extends JFrame {
 	
 	public void ChangementTetromino(Graphics g)
 	{
+		//p.afficher();
 		for (int i = tetrominoActuel.getObjetGraphique(0, 0).getY(); i < tetrominoActuel.getObjetGraphique(3, 3).getY(); i++) {
-			if(p.LigneComplete(i)==1) {
+			if(p.LigneComplete(i)) {
+				//System.out.print(i+"\n");
+				//p.afficherLigne(i);
 				p.SuppressionLigne(i);
 				Score+=100;
 				dessinerScore(g);
@@ -270,6 +280,9 @@ public class Interface extends JFrame {
 	 */
 	public Interface() {
 		
+		
+		 
+	    
 		Score=0;
 		tetrominoActuel=tirageTetromino();
 		tetrominoSuivant=tirageTetromino();
@@ -278,7 +291,6 @@ public class Interface extends JFrame {
 		contentPane = new JPanel();
 		
 		contentPane.setFocusable(true);
-
 		contentPane.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -286,7 +298,7 @@ public class Interface extends JFrame {
 			}
 		});
 		
-		this.getContentPane().setBackground(Color.WHITE);
+		//this.getContentPane().setBackground(Color.RED);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 560, 525);
