@@ -10,13 +10,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import jeu.MonPanel;
 
 import javax.swing.JLabel;
 
 import java.awt.Image;
-
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -54,11 +51,8 @@ public class Interface extends JFrame {
 			public void run() {
 				try {
 					Interface frame = new Interface();
-					//ImageIcon icon = new ImageIcon("src/jeu/tetris_image.jpg");
-				    //frame.add(new JLabel(icon, JLabel.CENTER));
-				    //frame.pack();
-				    frame.setVisible(true);
-				    
+					frame.setVisible(true);
+					frame.setBackground(Color.BLACK);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -155,16 +149,7 @@ public class Interface extends JFrame {
 		 bufferGraphics.drawLine(i*20,0,i*20,80);
 		 bufferGraphics.drawLine(0,i*20,80,i*20);
 	}
-	 /*
-	 // test 
 	
-		g.setColor(Color.WHITE);
-		g.drawLine((dimGrilleX-2)*this.grille[0][0].tailleCase,0,(dimGrilleX-2)*this.grille[0][0].tailleCase,(dimGrilleY-2)*this.grille[0][0].tailleCase);
-		for (int j = 0; j < dimGrilleY-1; j++) {
-			g.setColor(Color.WHITE);
-			g.drawLine(2*this.grille[0][0].tailleCase,j*this.grille[0][0].tailleCase,(dimGrilleX-2)*this.grille[0][0].tailleCase,j*this.grille[0][0].tailleCase);
-		}
-	*/
 	 
 	 // on dessine notre objet au sein de notre image
 	 
@@ -235,7 +220,7 @@ public class Interface extends JFrame {
 		dessinerTetrominoADroite(contentPane.getGraphics());
 	}
 	
-	
+
 	public void dessiner(Graphics g)
 	{
 	 Graphics bufferGraphics;
@@ -297,6 +282,9 @@ public class Interface extends JFrame {
 				KeyPressed(e);
 			}
 		});
+		contentPane.setBackground(Color.BLACK);
+		this.getContentPane().setBackground(Color.BLACK);
+		//this.setVisible(true);
 		
 		//this.getContentPane().setBackground(Color.RED);
 		
