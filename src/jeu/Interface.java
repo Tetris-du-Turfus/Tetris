@@ -350,7 +350,7 @@ public class Interface extends JFrame {
 						 monTimer.cancel();
 					     // afficher un message pour dire que la partie est perdu
 						 //repaint();
-						 contentPane.getGraphics().drawImage(game_over.getImage(),200,50,200,200,null);
+						 contentPane.getGraphics().drawImage(game_over.getImage(),165,10,150,150,null);
 					 }
 					
 				 }
