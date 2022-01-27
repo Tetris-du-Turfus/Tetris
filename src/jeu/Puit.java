@@ -5,17 +5,17 @@ import java.awt.Graphics;
 
 public class Puit {
 	
-	protected ObjetGraphique[][] grille;
-	protected int positionXGrille;
-	protected int positionYGrille;
+	private ObjetGraphique[][] grille;
+	private int positionXGrille;
+	private int positionYGrille;
 	
-	protected int dimGrilleX=14;
-	protected int dimGrilleY=24;
+	private int dimGrilleX=14;
+	private int dimGrilleY=24;
 	
-	protected int repereX;
-	protected int repereY ;
+	private int repereX;
+	private int repereY ;
 	
-	protected Tetromino TetromnoActuel;
+	private Tetromino TetromnoActuel;
 	
 	public Puit(int positionXGrille, int positionYGrille,int tailleCase) {
 		super();
@@ -237,18 +237,14 @@ public class Puit {
 		/**
 		 * Fonction qui nous donne si une ligne est complete
 		 * @param i : entier qui contient la ligne à regarder 
-		 * @return  1 si si la ligne est complète, 0 sinon 
+		 * @return  true si si la ligne est complète, false sinon 
 		 */
-		public int LigneComplete(int i) {
-			int ligneComplete=0;
-			int n=0;
-			for (int j = 2; j < dimGrilleX-2; j++) {
-				if(this.grille[j][i].getCouleur()>0)
-					n++;
+		public boolean LigneComplete(int i) {
+			for (int j = 0; j < dimGrilleX; j++) {
+				if(this.grille[j][i].getCouleur()==0)
+					return false;
 			}
-			if(n==dimGrilleX-4)
-				ligneComplete=1;
-			return ligneComplete;
+			return true;
 		}
 		
 		/**
@@ -290,5 +286,39 @@ public class Puit {
 			return 1;
 		}
 
+		public int getDimGrilleX() {
+			return dimGrilleX;
+		}
+
+		public void setDimGrilleX(int dimGrilleX) {
+			this.dimGrilleX = dimGrilleX;
+		}
+
+		public int getDimGrilleY() {
+			return dimGrilleY;
+		}
+
+		public void setDimGrilleY(int dimGrilleY) {
+			this.dimGrilleY = dimGrilleY;
+		}
+
+		public void afficher() {
+			for(int j=0;j<dimGrilleY;j++) {
+				for(int i=0;i<dimGrilleX;i++) {
+					System.out.print(grille[i][j].getCouleur());
+					System.out.print(" ");
+				}
+				System.out.print("\n");
+			}
+			System.out.print("\n");
+		}
+		public void afficherLigne(int j) {
+			for(int i=0;i<dimGrilleX;i++) {
+				System.out.print(grille[i][j].getCouleur());
+				System.out.print(" ");
+			}
+			System.out.print("\n");
+		}
+			
 
 }
