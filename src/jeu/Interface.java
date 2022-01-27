@@ -14,6 +14,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 
 import java.awt.Image;
+
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -38,7 +40,8 @@ public class Interface extends JFrame {
 	Puit p ;
 	Tetromino tetrominoActuel;
 	Tetromino tetrominoSuivant;
-	
+	private ImageIcon game_over;
+	boolean partie_perdue = false ;
 	int Score;
 	
 	private Timer monTimer;
@@ -92,6 +95,13 @@ public class Interface extends JFrame {
 		 
 		 
 	}
+	
+	public void paintComponent(Graphics graphics) 
+    {
+	  //super.paintComponents(graphics);
+      graphics.drawImage(game_over.getImage(), 350, 500,200,200, this);
+      
+    }
 	
 	public void dessinerPuit(Graphics g) {
 		
@@ -260,13 +270,26 @@ public class Interface extends JFrame {
 		return 1;
 		}
 	
+	/*
+	public void dessinerImage( Graphics g ) {
+
+
+		  // (x, y) coin superieur gauche de l'image
+		  g.drawImage(
+		    game_over.getImage(),
+		    350, 500,
+		    200, 200,
+		    null
+		  );
+		}
+	*/
+	
+	
+	
 	/**
 	 * Create the frame.
 	 */
 	public Interface() {
-		
-		
-		 
 	    
 		Score=0;
 		tetrominoActuel=tirageTetromino();
@@ -294,6 +317,9 @@ public class Interface extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		contentPane.setVisible(true);
+		
+		game_over = new ImageIcon("src/game_over.png");
 		
 		
 		/*
@@ -309,9 +335,7 @@ public class Interface extends JFrame {
 		
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//dessiner(contentPane.getGraphics());
-				//dessinerTetromino(contentPane.getGraphics());
-				//Objt.Gauche();
+
 				dessinerScore(contentPane.getGraphics());
 				dessinerPuit(contentPane.getGraphics());
 				dessinerTetrominoADroite(contentPane.getGraphics());
@@ -322,14 +346,24 @@ public class Interface extends JFrame {
 						 vitesse=200;
 					 }
 						
-					 if (ticTimer(contentPane.getGraphics())==0)
+					 if (ticTimer(contentPane.getGraphics())==0) {
 						 monTimer.cancel();
-					 // afficher un message pour dire que la partie est perdu
+					     // afficher un message pour dire que la partie est perdu
+						 //repaint();
+						 contentPane.getGraphics().drawImage(game_over.getImage(),200,50,200,200,null);
+					 }
+					
 				 }
 				};
 				monTimer.schedule(task, new Date(), vitesse);
 			}
 		});
+		
+		/*
+		if (partie_perdue) {
+			contentPane.getGraphics().drawImage(game_over.getImage(),0,0,40,30,null);
+		}
+		*/
 		
 		btnNewButton.setBounds(104, 153, 85, 21);
 		contentPane.add(btnNewButton);
