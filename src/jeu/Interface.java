@@ -1,5 +1,6 @@
 package jeu;
 
+
 import java.awt.BorderLayout;
 import java.awt.Graphics;
 
@@ -15,6 +16,12 @@ import javax.swing.JLabel;
 
 import java.awt.Image;
 
+import javax.print.DocFlavor.URL;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -23,6 +30,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.awt.event.ActionEvent;
 
 import java.util.Timer;
@@ -40,12 +50,15 @@ public class Interface extends JFrame {
 	Puit p ;
 	Tetromino tetrominoActuel;
 	Tetromino tetrominoSuivant;
-	private ImageIcon game_over;
-	boolean partie_perdue = false ;
+	private ImageIcon game_over = new ImageIcon("src/game_over.png");
+	private ImageIcon tetris_background = new ImageIcon("tetris_image.jpg");
 	int Score;
 	
 	private Timer monTimer;
 	private TimerTask task;
+	
+	boolean partie_en_cours = false ;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -63,8 +76,10 @@ public class Interface extends JFrame {
 		});
 	}
 	
-	private void KeyPressed(KeyEvent evt) {
+	private boolean KeyPressed(KeyEvent evt) {
 		int depFait;
+		boolean flag = false ;
+		
 		switch(evt.getKeyCode()) {
 			case KeyEvent.VK_SPACE:
 				depFait=p.RotationPossible();
@@ -90,15 +105,18 @@ public class Interface extends JFrame {
 					p.déplacementDroite();
 				dessinerPuit(contentPane.getGraphics());
 				break;
+			case KeyEvent.VK_ENTER:
+				flag = true ;
+				break ;
 				
 		}
+		return flag;
 		 
 		 
 	}
 	
 	public void paintComponent(Graphics graphics) 
     {
-	  //super.paintComponents(graphics);
       graphics.drawImage(game_over.getImage(), 350, 500,200,200, this);
       
     }
@@ -115,12 +133,12 @@ public class Interface extends JFrame {
 		 bufferGraphics.setColor(Color.GRAY);
 		 //bufferGraphics.fillRect(0,0,this.getContentPane().getWidth(),this.getContentPane().getHeight()); 
 		 // on dessine notre objet au sein de notre image
-		 //Puit p=new Puit(10,10,50)
 		 p.Afficher(bufferGraphics);
 		 // On afficher l'image mémoire à l'écran, on choisit où afficher l'image 
 		 g.drawImage(offscreen,100,10,null);
 	}
 	
+	/*
 	public void dessinerTetromino(Graphics g)
 	{
 	 Graphics bufferGraphics;
@@ -138,6 +156,7 @@ public class Interface extends JFrame {
 	 // On afficher l'image mémoire à l'écran, on choisit où afficher l'image 
 	 g.drawImage(offscreen,50,50,null);
 	}
+	*/
 	
 	public void dessinerTetrominoADroite(Graphics g)
 	{
@@ -284,10 +303,12 @@ public class Interface extends JFrame {
 		}
 	*/
 	
+
 	
 	
 	/**
 	 * Create the frame.
+	 *
 	 */
 	public Interface() {
 	    
@@ -302,34 +323,44 @@ public class Interface extends JFrame {
 		contentPane.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
-				KeyPressed(e);
+				if(KeyPressed(e)) {
+
+					dessinerScore(contentPane.getGraphics());
+					dessinerPuit(contentPane.getGraphics());
+					dessinerTetrominoADroite(contentPane.getGraphics());
+
+					monTimer = new Timer();
+					task = new TimerTask() {
+					 public void run() {
+						 if(Score>40) {
+							 vitesse=200;
+						 }
+						 
+						 //Le joueur a perdu
+						 if (ticTimer(contentPane.getGraphics())==0) {
+							 monTimer.cancel();
+							 partie_en_cours = false ;
+							 //affichage game over
+							 contentPane.getGraphics().drawImage(game_over.getImage(),165,10,150,150,null);
+						 }
+						
+					 }
+					};
+					monTimer.schedule(task, new Date(), vitesse);
+				}
 			}
 		});
 		contentPane.setBackground(Color.BLACK);
 		this.getContentPane().setBackground(Color.BLACK);
-		//this.setVisible(true);
-		
-		//this.getContentPane().setBackground(Color.RED);
-		
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 560, 525);
 		
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		contentPane.setVisible(true);
-		
-		game_over = new ImageIcon("src/game_over.png");
-		
 		
 		/*
-		//écriture 5
-		a=5;
-		JLabel lblNewLabel = new JLabel(Integer.toString(a));
-		lblNewLabel.setBounds(185, 118, 45, 13);
-		contentPane.add(lblNewLabel);
-		*/
-		
 		JButton btnNewButton = new JButton("Jouer");
 		btnNewButton.setFocusable(false);
 		
@@ -339,17 +370,18 @@ public class Interface extends JFrame {
 				dessinerScore(contentPane.getGraphics());
 				dessinerPuit(contentPane.getGraphics());
 				dessinerTetrominoADroite(contentPane.getGraphics());
+
 				monTimer = new Timer();
 				task = new TimerTask() {
 				 public void run() {
 					 if(Score>40) {
 						 vitesse=200;
 					 }
-						
+					 
+					 //Le joueur a perdu
 					 if (ticTimer(contentPane.getGraphics())==0) {
 						 monTimer.cancel();
-					     // afficher un message pour dire que la partie est perdu
-						 //repaint();
+						 //affichage game over
 						 contentPane.getGraphics().drawImage(game_over.getImage(),165,10,150,150,null);
 					 }
 					
@@ -359,14 +391,10 @@ public class Interface extends JFrame {
 			}
 		});
 		
-		/*
-		if (partie_perdue) {
-			contentPane.getGraphics().drawImage(game_over.getImage(),0,0,40,30,null);
-		}
-		*/
-		
 		btnNewButton.setBounds(104, 153, 85, 21);
 		contentPane.add(btnNewButton);
+		
+		*/
 		
 		
 		
