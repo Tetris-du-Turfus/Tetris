@@ -16,6 +16,7 @@ import javax.swing.JLabel;
 
 import java.awt.Image;
 
+import javax.imageio.ImageIO;
 import javax.print.DocFlavor.URL;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -31,6 +32,7 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.awt.event.ActionEvent;
@@ -44,20 +46,22 @@ import java.util.Random;
 public class Interface extends JFrame {
 
 	private JPanel contentPane;
-	int vitesse=1000;
-	int a;
-	TetrominoType7 Objt;
+	
 	Puit p ;
+	
 	Tetromino tetrominoActuel;
 	Tetromino tetrominoSuivant;
+	
 	private ImageIcon game_over = new ImageIcon("src/game_over.png");
 	private ImageIcon tetris_background = new ImageIcon("src/tetris_image.jpg");
+	
 	int Score;
+	boolean partie_en_cours = false ;
 	
 	private Timer monTimer;
 	private TimerTask task;
+	int vitesse=1000;
 	
-	boolean partie_en_cours = false ;
 	
 	/**
 	 * Launch the application.
@@ -69,13 +73,19 @@ public class Interface extends JFrame {
 					Interface frame = new Interface();
 					frame.setVisible(true);
 					frame.setBackground(Color.BLACK);
+					
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
+				
 			}
 		});
 	}
 	
+	//Fonction appelée lorsqu'une touche est pressée
+	//Retourne true si c'est la touche entrée, false sinon
+	//Elle sert également à déplacer et à exercer une rotation sur les tétromino
 	private boolean KeyPressed(KeyEvent evt) {
 		int depFait;
 		boolean flag = false ;
@@ -115,17 +125,18 @@ public class Interface extends JFrame {
 		 
 	}
 	
-	public void paintComponent(Graphics graphics) 
+	
+	public void dessinerImage(Graphics graphics) 
     {
       graphics.drawImage(tetris_background.getImage(),0,0,200,200, this);
       
     }
 	
 	@Override
-	public void paint(Graphics g) { // paint() method
+	public void paintComponents(Graphics g) { // paint() method
 		
 		g.drawImage(tetris_background.getImage(),0,0,200,200, this);
-		super.paint(g);
+		super.paintComponents(g);
 	}
 	
 	public void dessinerPuit(Graphics g) {
@@ -145,25 +156,6 @@ public class Interface extends JFrame {
 		 g.drawImage(offscreen,100,10,null);
 	}
 	
-	/*
-	public void dessinerTetromino(Graphics g)
-	{
-	 Graphics bufferGraphics;
-	 Image offscreen;
-	 // On crée une image en mémoire de la taille du ContentPane, on peut choisir la taille que l'on souhaite
-	 offscreen = createImage(200,200);
-	 // On récupère l'objet de type Graphics permettant de dessiner dans cette image
-	 bufferGraphics = offscreen.getGraphics();
-	 // On colore le fond de l'image en blanc
-	 bufferGraphics.setColor(Color.WHITE);
-	 bufferGraphics.fillRect(0,0,this.getContentPane().getWidth(),this.getContentPane().getHeight()); 
-	 // on dessine notre objet au sein de notre image
-	 //TetrominoType1 Objt=new TetrominoType1(1, 50);
-	 Objt.Afficher(bufferGraphics);
-	 // On afficher l'image mémoire à l'écran, on choisit où afficher l'image 
-	 g.drawImage(offscreen,50,50,null);
-	}
-	*/
 	
 	public void dessinerTetrominoADroite(Graphics g)
 	{
@@ -296,6 +288,8 @@ public class Interface extends JFrame {
 		return 1;
 		}
 	
+
+	
 	
 	/**
 	 * Create the frame.
@@ -322,13 +316,37 @@ public class Interface extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		/*
+		this.setContentPane(new JPanel() {
+	         @Override
+	         public void paintComponent(Graphics g) {
+	        	if (!partie_en_cours) {
+		            super.paintComponent(g);
+		            g.drawImage(tetris_background.getImage(), 0, 0, null);
+	        	}
+	        	else {
+	        		super.paintComponent(g);
+	        		contentPane.setBackground(Color.BLACK);
+	        	}
+	         }
+	      });
+		
 		repaint();
+		
+		*/
+		
+
+
+		
 		
 		contentPane.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				
 				if(KeyPressed(e)) {
+					
+					//repaint();
+					
 
 					dessinerScore(contentPane.getGraphics());
 					dessinerPuit(contentPane.getGraphics());
