@@ -98,8 +98,15 @@ public class Interface extends JFrame {
 	
 	public void paintComponent(Graphics graphics) 
     {
-	  //super.paintComponents(graphics);
-      graphics.drawImage(game_over.getImage(), 350, 500,200,200, this);
+		Graphics bufferGraphics;
+		Image offscreen;
+		offscreen = game_over.getImage();
+		bufferGraphics = offscreen.getGraphics();
+		//bufferGraphics.setColor(Color.GRAY);
+		//super.paintComponents(graphics);
+		//bufferGraphics.fillRect(0,0,this.getContentPane().getWidth(),this.getContentPane().getHeight()); 
+		graphics.drawImage(offscreen,0,0,500,500,null);
+		//graphics.drawImage(game_over.getImage(), 350, 500,200,200, this);
       
     }
 	
@@ -350,7 +357,8 @@ public class Interface extends JFrame {
 						 monTimer.cancel();
 					     // afficher un message pour dire que la partie est perdu
 						 //repaint();
-						 contentPane.getGraphics().drawImage(game_over.getImage(),165,10,150,150,null);
+						 paintComponent(contentPane.getGraphics());
+						 //contentPane.getGraphics().drawImage(game_over.getImage(),165,10,500,150,null);
 					 }
 					
 				 }
