@@ -51,7 +51,7 @@ public class Interface extends JFrame {
 	Tetromino tetrominoActuel;
 	Tetromino tetrominoSuivant;
 	private ImageIcon game_over = new ImageIcon("src/game_over.png");
-	private ImageIcon tetris_background = new ImageIcon("tetris_image.jpg");
+	private ImageIcon tetris_background = new ImageIcon("src/tetris_image.jpg");
 	int Score;
 	
 	private Timer monTimer;
@@ -117,9 +117,16 @@ public class Interface extends JFrame {
 	
 	public void paintComponent(Graphics graphics) 
     {
-      graphics.drawImage(game_over.getImage(), 350, 500,200,200, this);
+      graphics.drawImage(tetris_background.getImage(),0,0,200,200, this);
       
     }
+	
+	@Override
+	public void paint(Graphics g) { // paint() method
+		
+		g.drawImage(tetris_background.getImage(),0,0,200,200, this);
+		super.paint(g);
+	}
 	
 	public void dessinerPuit(Graphics g) {
 		
@@ -289,22 +296,6 @@ public class Interface extends JFrame {
 		return 1;
 		}
 	
-	/*
-	public void dessinerImage( Graphics g ) {
-
-
-		  // (x, y) coin superieur gauche de l'image
-		  g.drawImage(
-		    game_over.getImage(),
-		    350, 500,
-		    200, 200,
-		    null
-		  );
-		}
-	*/
-	
-
-	
 	
 	/**
 	 * Create the frame.
@@ -320,9 +311,23 @@ public class Interface extends JFrame {
 		contentPane = new JPanel();
 		
 		contentPane.setFocusable(true);
+		
+		contentPane.setBackground(Color.BLACK);
+		this.getContentPane().setBackground(Color.BLACK);
+
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 560, 525);
+		
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		repaint();
+		
 		contentPane.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
+				
 				if(KeyPressed(e)) {
 
 					dessinerScore(contentPane.getGraphics());
@@ -350,52 +355,7 @@ public class Interface extends JFrame {
 				}
 			}
 		});
-		contentPane.setBackground(Color.BLACK);
-		this.getContentPane().setBackground(Color.BLACK);
-
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 560, 525);
-		
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
-		
-		/*
-		JButton btnNewButton = new JButton("Jouer");
-		btnNewButton.setFocusable(false);
-		
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				dessinerScore(contentPane.getGraphics());
-				dessinerPuit(contentPane.getGraphics());
-				dessinerTetrominoADroite(contentPane.getGraphics());
-
-				monTimer = new Timer();
-				task = new TimerTask() {
-				 public void run() {
-					 if(Score>40) {
-						 vitesse=200;
-					 }
-					 
-					 //Le joueur a perdu
-					 if (ticTimer(contentPane.getGraphics())==0) {
-						 monTimer.cancel();
-						 //affichage game over
-						 contentPane.getGraphics().drawImage(game_over.getImage(),165,10,150,150,null);
-					 }
-					
-				 }
-				};
-				monTimer.schedule(task, new Date(), vitesse);
-			}
-		});
-		
-		btnNewButton.setBounds(104, 153, 85, 21);
-		contentPane.add(btnNewButton);
-		
-		*/
-		
+	
 		
 		
 	}
