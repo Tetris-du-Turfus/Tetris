@@ -118,32 +118,32 @@ public class Interface extends JFrame {
 	//Retourne true si c'est la touche entrée, false sinon
 	//Elle sert également à déplacer et à exercer une rotation sur les tétromino
 	private boolean KeyPressed(KeyEvent evt) {
-		int depFait;
+		Boolean depFait;
 		boolean flag = false ;
 		if(partie_en_cours)
 		{
 			switch(evt.getKeyCode()) {
 			case KeyEvent.VK_SPACE:
 				depFait=p.RotationPossible();
-				if(depFait==1)
+				if(depFait)
 						p.RotationTetromino();
 				 dessinerPuit(contentPane.getGraphics());
 				 break;
 			case KeyEvent.VK_DOWN:
 				depFait=p.déplacementBasPossible();
-				if(depFait==1)
+				if(depFait)
 					p.déplacementBas();
 				dessinerPuit(contentPane.getGraphics());
 				break;
 			case KeyEvent.VK_LEFT:
 				depFait=p.déplacementGauchePossible();
-				if(depFait==1)
+				if(depFait)
 					p.déplacementGauche();
 				dessinerPuit(contentPane.getGraphics());
 				break;
 			case KeyEvent.VK_RIGHT:
 				depFait=p.déplacementDroitePossible();
-				if(depFait==1)
+				if(depFait)
 					p.déplacementDroite();
 				dessinerPuit(contentPane.getGraphics());
 				break;
@@ -293,8 +293,8 @@ public class Interface extends JFrame {
 	}
 	
 	private int ticTimer(Graphics g) {
-		int depFait=p.déplacementBasPossible();
-			if(depFait==1)
+		Boolean depFait=p.déplacementBasPossible();
+			if(depFait)
 				p.déplacementBas();
 			else
 				if(p.partiePerdu()==1)

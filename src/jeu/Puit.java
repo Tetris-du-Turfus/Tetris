@@ -51,28 +51,34 @@ public class Puit {
 		
 	}
 	
+	/**
+	 * Déplacement du tétromino sur le puit vers le bas
+	 * précondition: le déplacement vers le bas est possible
+	 */
 	public void déplacementBas() {
 		//tester avant si le déplacement est possible
 		for(int i=0; i<4; i++) {
 			for (int j = 3; j > -1; j--) {
 				if(this.TetromnoActuel.getObjetGraphique(i, j).getCouleur()!=0) {
 					grille[TetromnoActuel.getObjetGraphique(i, j).getX()][TetromnoActuel.getObjetGraphique(i, j).getY()].setCouleur(0);
-					grille[TetromnoActuel.getObjetGraphique(i, j).getX()][TetromnoActuel.getObjetGraphique(i, j).getY()+1].setCouleur(this.TetromnoActuel.getObjetGraphique(i, j).getCouleur()+
-							grille[TetromnoActuel.getObjetGraphique(i, j).getX()][TetromnoActuel.getObjetGraphique(i, j).getY()+1].getCouleur());
+					grille[TetromnoActuel.getObjetGraphique(i, j).getX()][TetromnoActuel.getObjetGraphique(i, j).getY()+1].setCouleur(this.TetromnoActuel.getObjetGraphique(i, j).getCouleur());
 				}
 			}
 		}
 		this.TetromnoActuel.Bas();
 	}
 	
+	/**
+	 * Déplacement du tétromino sur le puit vers la gauche
+	 * précondition: le déplacement vers le gauche est possible
+	 */
 	public void déplacementGauche() {
 		//tester avant si le déplacement est possible
 		for(int i=0; i<4; i++) {
 			for (int j = 0; j < 4; j++) {
 				if(this.TetromnoActuel.getObjetGraphique(i, j).getCouleur()!=0) {
 					grille[TetromnoActuel.getObjetGraphique(i, j).getX()][TetromnoActuel.getObjetGraphique(i, j).getY()].setCouleur(0);
-					grille[TetromnoActuel.getObjetGraphique(i, j).getX()-1][TetromnoActuel.getObjetGraphique(i, j).getY()].setCouleur(this.TetromnoActuel.getObjetGraphique(i, j).getCouleur()+
-							grille[TetromnoActuel.getObjetGraphique(i, j).getX()-1][TetromnoActuel.getObjetGraphique(i, j).getY()].getCouleur());
+					grille[TetromnoActuel.getObjetGraphique(i, j).getX()-1][TetromnoActuel.getObjetGraphique(i, j).getY()].setCouleur(this.TetromnoActuel.getObjetGraphique(i, j).getCouleur());
 				}
 			}
 		}
@@ -80,22 +86,29 @@ public class Puit {
 	}
 	
 
+	/**
+	 * Déplacement du tétromino sur le puit vers la droite
+	 * précondition: le déplacement vers la droite est possible
+	 */
 	public void déplacementDroite() {
 		
 		for(int i=3; i>-1; i--) {
 			for (int j = 0; j < 4; j++) {
 				if(this.TetromnoActuel.getObjetGraphique(i, j).getCouleur()!=0) {
 					grille[TetromnoActuel.getObjetGraphique(i, j).getX()][TetromnoActuel.getObjetGraphique(i, j).getY()].setCouleur(0);
-					grille[TetromnoActuel.getObjetGraphique(i, j).getX()+1][TetromnoActuel.getObjetGraphique(i, j).getY()].setCouleur(this.TetromnoActuel.getObjetGraphique(i, j).getCouleur()+
-							grille[TetromnoActuel.getObjetGraphique(i, j).getX()+1][TetromnoActuel.getObjetGraphique(i, j).getY()].getCouleur());
+					grille[TetromnoActuel.getObjetGraphique(i, j).getX()+1][TetromnoActuel.getObjetGraphique(i, j).getY()].setCouleur(this.TetromnoActuel.getObjetGraphique(i, j).getCouleur());
 				}
 			}
 		}
 		this.TetromnoActuel.Droite();
 	}
 	
-	public int déplacementBasPossible() {
-		int sortie=1;
+	/**
+	 * Regarde si le déplacement vers le bas est possible
+	 * @return true si le déplacement vers le bas est possible, sinon false
+	 */
+	public Boolean déplacementBasPossible() {
+		Boolean sortie=true;
 		
 		for(int i=0; i<4; i++) {
 			for (int j = 3; j > -1; j--) {
@@ -105,7 +118,7 @@ public class Puit {
 								grille[TetromnoActuel.getObjetGraphique(i, j).getX()][TetromnoActuel.getObjetGraphique(i, j).getY()+1].getCouleur();
 						
 						if(val>18) {
-							sortie=0;
+							sortie=false;
 						}
 					}
 					//j=3
@@ -114,7 +127,7 @@ public class Puit {
 								grille[TetromnoActuel.getObjetGraphique(i, j).getX()][TetromnoActuel.getObjetGraphique(i, j).getY()+1].getCouleur();
 						
 						if(val>18) {
-							sortie=0;
+							sortie=false;
 						}
 					}
 					
@@ -125,9 +138,12 @@ public class Puit {
 		return sortie;
 	}
 	
-	//retourne 1 si le déplacement est possible sinon 0
-	public int déplacementGauchePossible() {
-		int sortie=1;
+	/**
+	 * Regarde si le déplacement vers la gauche est possible
+	 * @return true si le déplacement vers la gauche est possible, sinon false
+	 */
+	public Boolean déplacementGauchePossible() {
+		Boolean sortie=true;
 		
 		for(int i=0; i<4; i++) {
 			for (int j = 0; j < 4; j++) {
@@ -137,7 +153,7 @@ public class Puit {
 								grille[TetromnoActuel.getObjetGraphique(i, j).getX()-1][TetromnoActuel.getObjetGraphique(i, j).getY()].getCouleur();
 						
 						if(val>18) {
-							sortie=0;
+							sortie=false;
 						}
 					}
 					//i=0
@@ -146,7 +162,7 @@ public class Puit {
 								grille[TetromnoActuel.getObjetGraphique(i, j).getX()-1][TetromnoActuel.getObjetGraphique(i, j).getY()].getCouleur();
 						
 						if(val>18) {
-							sortie=0;
+							sortie=false;
 						}
 					}
 					
@@ -156,9 +172,12 @@ public class Puit {
 		return sortie;
 	}
 	
-	//retourne 1 si le déplacement est possible sinon 0
-	public int déplacementDroitePossible() {
-		int sortie=1;
+	/**
+	 * Regarde si le déplacement vers la droite est possible
+	 * @return true si le déplacement vers la droite est possible, sinon false
+	 */
+	public Boolean déplacementDroitePossible() {
+		Boolean sortie=true;
 		
 		for(int i=3; i>-1; i--) {
 			for (int j = 0; j < 4; j++) {
@@ -168,7 +187,7 @@ public class Puit {
 								grille[TetromnoActuel.getObjetGraphique(i, j).getX()+1][TetromnoActuel.getObjetGraphique(i, j).getY()].getCouleur();
 						
 						if(val>18) {
-							sortie=0;
+							sortie=false;
 							
 						}
 					}
@@ -178,7 +197,7 @@ public class Puit {
 								grille[TetromnoActuel.getObjetGraphique(i, j).getX()+1][TetromnoActuel.getObjetGraphique(i, j).getY()].getCouleur();
 						
 						if(val>18) {
-							sortie=0;
+							sortie=false;
 						}
 					}
 					
@@ -237,113 +256,116 @@ public class Puit {
 		
 	}
 	
-	//retourne 1 si le déplacement est possible sinon 0
-		public int RotationPossible() {
-			int sortie=1;
-			int position = this.TetromnoActuel.getPosition();
-			for(int i=0; i < 4; i++) {
-				for (int j = 0; j < 4; j++) {
-					if(this.grille[TetromnoActuel.getObjetGraphique(i, j).getX()][TetromnoActuel.getObjetGraphique(i, j).getY()].getCouleur()!=0 ) {
-						int val=this.grille[TetromnoActuel.getObjetGraphique(i, j).getX()][TetromnoActuel.getObjetGraphique(i, j).getY()].getCouleur()+
-								this.TetromnoActuel.getObjetGraphique(i, j,(position+1)%4).getCouleur()-this.TetromnoActuel.getObjetGraphique(i, j).getCouleur();
+	/**
+	 * Regarde si la rotation est possible
+	 * @return true si la rotaion est possible, sinon false
+	 */
+	public Boolean RotationPossible() {
+		Boolean sortie=true;
+		int position = this.TetromnoActuel.getPosition();
+		for(int i=0; i < 4; i++) {
+			for (int j = 0; j < 4; j++) {
+				if(this.grille[TetromnoActuel.getObjetGraphique(i, j).getX()][TetromnoActuel.getObjetGraphique(i, j).getY()].getCouleur()!=0 ) {
+					int val=this.grille[TetromnoActuel.getObjetGraphique(i, j).getX()][TetromnoActuel.getObjetGraphique(i, j).getY()].getCouleur()+
+							this.TetromnoActuel.getObjetGraphique(i, j,(position+1)%4).getCouleur()-this.TetromnoActuel.getObjetGraphique(i, j).getCouleur();
+					
+					if(val>18) {
+						sortie=false;
 						
-						if(val>18) {
-							sortie=0;
-							
-						}
-					}
-				}
-			}
-			return sortie;
-		}
-		
-		/**
-		 * Fonction qui nous donne si une ligne est complete
-		 * @param i : entier qui contient la ligne à regarder 
-		 * @return  true si si la ligne est complète, false sinon 
-		 */
-		public boolean LigneComplete(int i) {
-			for (int j = 2; j < dimGrilleX-2; j++) {
-				if(this.grille[j][i].getCouleur()==0 ||this.grille[j][i].getCouleur()==9)
-					return false;
-			}
-			return true;
-		}
-		
-		/**
-		 * Supprime une ligne de la grille et décale vers le bas toutes les lignes du dessus
-		 * @param Ligne : entier contenant l'indice de la ligne à supprimer
-		 */
-		public void SuppressionLigne(int Ligne) {
-			if(Ligne!=0) {
-				for (int i = Ligne; i > 1; i--) {
-					for (int j = 2; j < dimGrilleX-2; j++) {
-						this.grille[j][i].setCouleur(this.grille[j][i-1].getCouleur());
 					}
 				}
 			}
 		}
+		return sortie;
+	}
 		
-		/**
-		 * @param t : tétromino 
-		 */
-		public void AjouterTetromino(Tetromino t) {
-			this.TetromnoActuel=t;
-			this.TetromnoActuel.setRepere(this.repereX, this.repereY);
-			for(int i=0;i<4;i++) {
-				for (int j = 0; j < 4; j++) {
-					this.grille[i+this.repereX][j+this.repereY].setCouleur(t.getObjetGraphique(i, j).getCouleur());
+	/**
+	 * Fonction qui nous donne si une ligne est complete
+	 * @param i : entier qui contient la ligne à regarder 
+	 * @return  true si si la ligne est complète, false sinon 
+	 */
+	public boolean LigneComplete(int i) {
+		for (int j = 2; j < dimGrilleX-2; j++) {
+			if(this.grille[j][i].getCouleur()==0 ||this.grille[j][i].getCouleur()==9)
+				return false;
+		}
+		return true;
+	}
+	
+	/**
+	 * Supprime une ligne de la grille et décale vers le bas toutes les lignes du dessus
+	 * @param Ligne : entier contenant l'indice de la ligne à supprimer
+	 */
+	public void SuppressionLigne(int Ligne) {
+		if(Ligne!=0) {
+			for (int i = Ligne; i > 1; i--) {
+				for (int j = 2; j < dimGrilleX-2; j++) {
+					this.grille[j][i].setCouleur(this.grille[j][i-1].getCouleur());
 				}
 			}
 		}
-		
-		/**
-		 * Fonction qui indique si l'on peut continuer à jouer ousi la partie est perdu
-		 * @return 0 si la partie est perdu
-		 */
-		public int partiePerdu()
-		{
-			for(int i=0;i<4;i++) {
-				for (int j = 0; j < 4; j++) {
-					if(this.grille[i+this.repereX][j+this.repereY].getCouleur()!=0)
-						return 0;
-				}
+	}
+	
+	/**
+	 * @param t : tétromino 
+	 */
+	public void AjouterTetromino(Tetromino t) {
+		this.TetromnoActuel=t;
+		this.TetromnoActuel.setRepere(this.repereX, this.repereY);
+		for(int i=0;i<4;i++) {
+			for (int j = 0; j < 4; j++) {
+				this.grille[i+this.repereX][j+this.repereY].setCouleur(t.getObjetGraphique(i, j).getCouleur());
 			}
-			return 1;
 		}
-
-		public int getDimGrilleX() {
-			return dimGrilleX;
+	}
+	
+	/**
+	 * Fonction qui indique si l'on peut continuer à jouer ousi la partie est perdu
+	 * @return 0 si la partie est perdu
+	 */
+	public int partiePerdu()
+	{
+		for(int i=0;i<4;i++) {
+			for (int j = 0; j < 4; j++) {
+				if(this.grille[i+this.repereX][j+this.repereY].getCouleur()!=0)
+					return 0;
+			}
 		}
+		return 1;
+	}
 
-		public void setDimGrilleX(int dimGrilleX) {
-			this.dimGrilleX = dimGrilleX;
-		}
+	public int getDimGrilleX() {
+		return dimGrilleX;
+	}
 
-		public int getDimGrilleY() {
-			return dimGrilleY;
-		}
+	public void setDimGrilleX(int dimGrilleX) {
+		this.dimGrilleX = dimGrilleX;
+	}
 
-		public void setDimGrilleY(int dimGrilleY) {
-			this.dimGrilleY = dimGrilleY;
-		}
+	public int getDimGrilleY() {
+		return dimGrilleY;
+	}
+
+	public void setDimGrilleY(int dimGrilleY) {
+		this.dimGrilleY = dimGrilleY;
+	}
 
 
-		public int getPositionYGrille() {
-			return positionYGrille;
-		}
+	public int getPositionYGrille() {
+		return positionYGrille;
+	}
 
-		public void setPositionYGrille(int positionYGrille) {
-			this.positionYGrille = positionYGrille;
-		}
+	public void setPositionYGrille(int positionYGrille) {
+		this.positionYGrille = positionYGrille;
+	}
 
-		public int getPositionXGrille() {
-			return positionXGrille;
-		}
+	public int getPositionXGrille() {
+		return positionXGrille;
+	}
 
-		public void setPositionXGrille(int positionXGrille) {
-			this.positionXGrille = positionXGrille;
-		}
+	public void setPositionXGrille(int positionXGrille) {
+		this.positionXGrille = positionXGrille;
+	}
 			
 
 }
