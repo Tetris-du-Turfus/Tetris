@@ -323,25 +323,6 @@ public class Interface extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		/*
-		this.setContentPane(new JPanel() {
-	         @Override
-	         public void paintComponent(Graphics g) {
-	        	if (!partie_en_cours) {
-		            super.paintComponent(g);
-		            g.drawImage(tetris_background.getImage(), 0, 0, null);
-	        	}
-	        	else {
-	        		super.paintComponent(g);
-	        		contentPane.setBackground(Color.BLACK);
-	        	}
-	         }
-	      });
-		
-		repaint();
-		
-		*/
-		
 		contentPane.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
