@@ -31,8 +31,8 @@ public class Puit {
 	 */
 	public Puit(int positionX, int positionY,int tailleCase) {
 		super();
-		this.setPositionXGrille(positionX);
-		this.setPositionYGrille(positionY);
+		this.positionXGrille=positionX;
+		this.positionYGrille=positionY;
 		
 		//initalisation de la grille
 		this.grille = new ObjetGraphique[dimGrilleX][dimGrilleY];
@@ -307,6 +307,7 @@ public class Puit {
 	}
 	
 	/**
+	 * Ajoute un tétromino au puit aux coordonnées du repère
 	 * @param t : tétromino 
 	 */
 	public void AjouterTetromino(Tetromino t) {
@@ -321,51 +322,21 @@ public class Puit {
 	
 	/**
 	 * Fonction qui indique si l'on peut continuer à jouer ousi la partie est perdu
-	 * @return 0 si la partie est perdu
+	 * @return true si la partie est perdu sinon false
 	 */
-	public int partiePerdu()
+	public Boolean partiePerdu()
 	{
 		for(int i=0;i<4;i++) {
 			for (int j = 0; j < 4; j++) {
 				if(this.grille[i+this.repereX][j+this.repereY].getCouleur()!=0)
-					return 0;
+					return false;
 			}
 		}
-		return 1;
-	}
-
-	public int getDimGrilleX() {
-		return dimGrilleX;
-	}
-
-	public void setDimGrilleX(int dimGrilleX) {
-		this.dimGrilleX = dimGrilleX;
-	}
-
-	public int getDimGrilleY() {
-		return dimGrilleY;
-	}
-
-	public void setDimGrilleY(int dimGrilleY) {
-		this.dimGrilleY = dimGrilleY;
+		return true;
 	}
 
 
-	public int getPositionYGrille() {
-		return positionYGrille;
-	}
-
-	public void setPositionYGrille(int positionYGrille) {
-		this.positionYGrille = positionYGrille;
-	}
-
-	public int getPositionXGrille() {
-		return positionXGrille;
-	}
-
-	public void setPositionXGrille(int positionXGrille) {
-		this.positionXGrille = positionXGrille;
-	}
+	
 			
 
 }

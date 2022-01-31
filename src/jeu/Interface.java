@@ -297,7 +297,7 @@ public class Interface extends JFrame {
 			if(depFait)
 				p.déplacementBas();
 			else
-				if(p.partiePerdu()==1)
+				if(p.partiePerdu())
 					ChangementTetromino(g);
 				else
 					return 0;
@@ -329,17 +329,6 @@ public class Interface extends JFrame {
 		
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		/*
-		JLabel lbtxt = new JLabel("Appuyer sur Entr\u00E9e pour jouer");
-		lbtxt.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lbtxt.setForeground(Color.WHITE);
-		lbtxt.setBounds(147, 313, 233, 36);
-		if(partie_en_cours)
-			lbtxt.setVisible(false);
-		else 
-			lbtxt.setVisible(true);
-		//contentPane.add(lbtxt);
-		*/
 		JLabel lblNewLabel = new JLabel("New label");
 		lblNewLabel.setIcon(new ImageIcon(Interface.class.getResource("/jeu/tetris_image.jpg")));
 		lblNewLabel.setBounds(0, 0, 552, 478);
