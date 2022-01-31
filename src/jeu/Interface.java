@@ -35,6 +35,7 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+import java.awt.image.ImageObserver;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
@@ -65,6 +66,7 @@ public class Interface extends JFrame {
 	
 	private ImageIcon game_over = new ImageIcon("src/GameOver.png");
 	private ImageIcon tetris_background = new ImageIcon("src/tetris_image.jpg");
+	private ImageIcon tetrisWord = new ImageIcon("src/Tetris.png");
 	
 	int Score;
 	boolean partie_en_cours = false ;
@@ -157,7 +159,12 @@ public class Interface extends JFrame {
 		 
 		 
 	}
-	
+	public void dessinerTetris(Graphics graphics) 
+    {
+		Image image;
+		image = tetrisWord.getImage();
+		graphics.drawImage(image, 5, 50,100,120,this);
+    }
 	
 	public void dessinerImage(Graphics graphics) 
     {
@@ -236,7 +243,7 @@ public class Interface extends JFrame {
 	 bufferGraphics.setColor(Color.RED);
 	 bufferGraphics.drawString(String.valueOf(Score),20,20);	 
 	 // On afficher l'image mémoire à l'écran, on choisit où afficher l'image 
-	 g.drawImage(offscreen,10,10,null);
+	 g.drawImage(offscreen,400,300,null);
 	}
 	
 	public Tetromino tirageTetromino() {
@@ -321,7 +328,7 @@ public class Interface extends JFrame {
 		
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+		/*
 		JLabel lbtxt = new JLabel("Appuyer sur Entr\u00E9e pour jouer");
 		lbtxt.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lbtxt.setForeground(Color.WHITE);
@@ -330,8 +337,8 @@ public class Interface extends JFrame {
 			lbtxt.setVisible(false);
 		else 
 			lbtxt.setVisible(true);
-		contentPane.add(lbtxt);
-		
+		//contentPane.add(lbtxt);
+		*/
 		JLabel lblNewLabel = new JLabel("New label");
 		lblNewLabel.setIcon(new ImageIcon(Interface.class.getResource("/jeu/tetris_image.jpg")));
 		lblNewLabel.setBounds(5, 5, 552, 478);
@@ -366,6 +373,7 @@ public class Interface extends JFrame {
 					dessinerScore(contentPane.getGraphics());
 					dessinerPuit(contentPane.getGraphics());
 					dessinerTetrominoADroite(contentPane.getGraphics());
+					dessinerTetris(contentPane.getGraphics());
 
 					monTimer = new Timer();
 					task = new TimerTask() {
