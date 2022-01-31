@@ -193,6 +193,12 @@ public class Puit {
 		 
 	}
 	
+	public void afficher() {
+		for(int i=0;i<dimGrilleY;i++) {
+			afficherLigne(i);
+		}
+		System.out.print("\n");
+	}
 	public void afficherLigne(int j) {
 		for(int i=0;i<dimGrilleX;i++) {
 			System.out.print(grille[i][j].getCouleur());
@@ -245,8 +251,8 @@ public class Puit {
 		 * @return  true si si la ligne est complète, false sinon 
 		 */
 		public boolean LigneComplete(int i) {
-			for (int j = 0; j < dimGrilleX; j++) {
-				if(this.grille[j][i].getCouleur()==0)
+			for (int j = 2; j < dimGrilleX-2; j++) {
+				if(this.grille[j][i].getCouleur()==0 ||this.grille[j][i].getCouleur()==9)
 					return false;
 			}
 			return true;

@@ -274,7 +274,8 @@ public class Interface extends JFrame {
 	public void ChangementTetromino(Graphics g)
 	{
 		//p.afficher();
-		for (int i = tetrominoActuel.getObjetGraphique(0, 0).getY(); i < tetrominoActuel.getObjetGraphique(3, 3).getY(); i++) {
+		for (int i = tetrominoActuel.getObjetGraphique(0, 0).getY(); i <= tetrominoActuel.getObjetGraphique(3, 3).getY(); i++) {
+			//p.afficherLigne(i);
 			if(p.LigneComplete(i)) {
 				//System.out.print(i+"\n");
 				//p.afficherLigne(i);
