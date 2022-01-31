@@ -34,6 +34,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
@@ -44,6 +45,12 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.Date;
 import java.util.Random;
+import javax.swing.SwingConstants;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.BoxLayout;
 
 
 public class Interface extends JFrame {
@@ -74,7 +81,7 @@ public class Interface extends JFrame {
 			public void run() {
 				try {
 					Interface frame = new Interface();
-					frame.setVisible(true);
+					/*frame.setVisible(true);
 					frame.setBackground(Color.BLACK);
 					ImageIcon icon = new ImageIcon("src/tetris_image.jpg");
 					JTextArea text = new JTextArea() 
@@ -92,7 +99,7 @@ public class Interface extends JFrame {
 				    Container content = frame.getContentPane();
 				    content.add(pane, BorderLayout.CENTER);
 				    frame.setDefaultCloseOperation(3);
-				    //frame.setSize(400, 300);
+				    //frame.setSize(400, 300);*/
 				    frame.setVisible(true);
 					
 					
@@ -305,11 +312,23 @@ public class Interface extends JFrame {
 
 		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 560, 525);
+		//BufferedImage img = ImageIO.read("src/game_over.png");
 		//contentPane.setOpaque(false);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		
 		setContentPane(contentPane);
-		contentPane.setLayout(new BorderLayout(0, 0));
+		contentPane.setLayout(null);
+		
+		JLabel lbtxt = new JLabel("Appuyer sur Entr\u00E9e pour jouer");
+		lbtxt.setBounds(115, 358, 187, 80);
+		contentPane.add(lbtxt);
+		
+		JLabel lblNewLabel = new JLabel("New label");
+		lblNewLabel.setIcon(new ImageIcon(Interface.class.getResource("/jeu/tetris_image.jpg")));
+		lblNewLabel.setBounds(5, 5, 552, 478);
+		contentPane.add(lblNewLabel);
+		
+		
 		
 		//contentPane.getGraphics().drawImage(game_over.getImage(),165,10,150,150,null);
 		contentPane.addKeyListener(new KeyAdapter() {
@@ -318,7 +337,7 @@ public class Interface extends JFrame {
 			public void keyPressed(KeyEvent e) {
 				if(KeyPressed(e)) {
 					
-					dessinerImage(getGraphics());
+					//TextEntree.setVisible(false);
 					//repaint();
 					Score=0;
 					tetrominoActuel=tirageTetromino();
