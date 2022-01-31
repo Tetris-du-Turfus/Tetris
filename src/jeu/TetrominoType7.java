@@ -5,6 +5,11 @@ import java.awt.Graphics;
 
 public class TetrominoType7 extends Tetromino{
 
+	/**
+	 * Constructeur de tétromino type 7
+	 * @param position : entier représentant la position actuelle du tétromino
+	 * @param tailleCase : entier représentant la taille d'une case d"un élément graphique
+	 */
 	public TetrominoType7(int position,int tailleCase) {
 		super(7, position);
 		// TODO Auto-generated constructor stub
@@ -99,6 +104,11 @@ public class TetrominoType7 extends Tetromino{
 		this.tab[3][3][3]=new ObjetGraphique(3,3,tailleCase,0);
 	}
 
+	
+	/**
+	 *Affichage graphique du tétromino
+	 * @param g : graphique dans lequel sera affiché le tétromino
+	 */
 	public void Afficher(Graphics g) {
 		
 		

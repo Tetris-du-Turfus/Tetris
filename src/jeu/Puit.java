@@ -5,31 +5,43 @@ import java.awt.Graphics;
 
 public class Puit {
 	
+	//grille d'objetGraphique représentant le puit
 	private ObjetGraphique[][] grille;
 	
+	//position de la sur l'image
 	private int positionXGrille;
 	private int positionYGrille;
 	
+	//dimension de la grille
 	private int dimGrilleX=14;
 	private int dimGrilleY=24;
 	
-	private int repereX;
-	private int repereY ;
+	//position initial d'un tétromino
+	private int repereX = 5;
+	private int repereY = 0;
 	
+	//tétromino actuellement sur le puit
 	private Tetromino TetromnoActuel;
 	
+	/**
+	 * Constructeur du Puit
+	 * @param positionX : entier représentant la position de la grille en x
+	 * @param positionY : entier représentant la position de la grille en y
+	 * @param tailleCase : entier représentant la dimension de chaque case
+	 */
 	public Puit(int positionX, int positionY,int tailleCase) {
 		super();
 		this.setPositionXGrille(positionX);
 		this.setPositionYGrille(positionY);
-		this.repereX = 5;
-		this.repereY = 0 ;
 		
+		//initalisation de la grille
 		this.grille = new ObjetGraphique[dimGrilleX][dimGrilleY];
 		for (int i = 0; i <dimGrilleX; i++) {
 			for (int j = 0; j < dimGrilleY; j++) {
+				//cas où l'objet est un bord, on choisit de mettre la couleur = 9
 				if(i==0 || i==1 || i==dimGrilleX-1 || i==dimGrilleX-2 || j==dimGrilleY-1 || j==dimGrilleY-2)
 					this.grille[i][j]=new ObjetGraphique(i, j, tailleCase,9);
+				//l'objet n'est pas un bord
 				else {
 					this.grille[i][j]=new ObjetGraphique(i, j, tailleCase);
 				}
@@ -272,6 +284,9 @@ public class Puit {
 			}
 		}
 		
+		/**
+		 * @param t : tétromino 
+		 */
 		public void AjouterTetromino(Tetromino t) {
 			this.TetromnoActuel=t;
 			this.TetromnoActuel.setRepere(this.repereX, this.repereY);

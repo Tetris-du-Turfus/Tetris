@@ -85,7 +85,7 @@ public class Interface extends JFrame {
 				try {
 					Interface frame = new Interface();
 					/*frame.setVisible(true);
-					frame.setBackground(Color.BLACK);
+					frame.setBackground(Color.LIGHT_GRAY);
 					ImageIcon icon = new ImageIcon("src/tetris_image.jpg");
 					JTextArea text = new JTextArea() 
 				    {
@@ -189,7 +189,7 @@ public class Interface extends JFrame {
 		 // On récupère l'objet de type Graphics permettant de dessiner dans cette image
 		 bufferGraphics = offscreen.getGraphics();
 		 // On colore le fond de l'image en blanc
-		 bufferGraphics.setColor(Color.BLACK);
+		 bufferGraphics.setColor(Color.LIGHT_GRAY);
 		 bufferGraphics.fillRect(0,0,this.getContentPane().getWidth(),this.getContentPane().getHeight()); 
 		 //bufferGraphics.fillRect(0,0,this.getContentPane().getWidth(),this.getContentPane().getHeight()); 
 		 // on dessine notre objet au sein de notre image
@@ -319,7 +319,7 @@ public class Interface extends JFrame {
 		contentPane = new JPanel();
 		
 		contentPane.setFocusable(true);
-		contentPane.setBackground(Color.BLACK);
+		contentPane.setBackground(Color.LIGHT_GRAY);
 
 		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 560, 525);
@@ -342,7 +342,7 @@ public class Interface extends JFrame {
 		*/
 		JLabel lblNewLabel = new JLabel("New label");
 		lblNewLabel.setIcon(new ImageIcon(Interface.class.getResource("/jeu/tetris_image.jpg")));
-		lblNewLabel.setBounds(5, 5, 552, 478);
+		lblNewLabel.setBounds(0, 0, 552, 478);
 		if(partie_en_cours)
 			lblNewLabel.setVisible(false);
 		else 
@@ -360,8 +360,15 @@ public class Interface extends JFrame {
 					//contentPane.remove(lblNewLabel);
 					//contentPane.remove(lbtxt);
 					//TextEntree.setVisible(false);
-					contentPane.getGraphics().setColor(Color.WHITE);
-					contentPane.getGraphics().fillRect(0,0,getContentPane().getWidth(),getContentPane().getHeight()); 
+					
+					Image fond= createImage(getContentPane().getWidth(),getContentPane().getHeight());
+					Graphics g=fond.getGraphics();
+					 // On colore le fond de l'image en blanc
+					 g.setColor(Color.LIGHT_GRAY);
+					 g.fillRect(0,0,getContentPane().getWidth(),getContentPane().getHeight()); 
+					 
+					contentPane.getGraphics().drawImage(fond,0,0,null);
+					//contentPane.getGraphics().fillRect(0,0,getContentPane().getWidth(),getContentPane().getHeight()); 
 					 
 					//contentPane.getGraphics().drawRect(game_over.getImage(),165,10,150,150,null);
 					Score=0;
@@ -370,7 +377,7 @@ public class Interface extends JFrame {
 					p = new Puit(10,10,20);
 					p.AjouterTetromino(tetrominoActuel);
 					
-					//contentPane.setBackground(Color.BLACK);
+					//contentPane.setBackground(Color.LIGHT_GRAY);
 					dessinerScore(contentPane.getGraphics());
 					dessinerPuit(contentPane.getGraphics());
 					dessinerTetrominoADroite(contentPane.getGraphics());
