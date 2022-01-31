@@ -207,6 +207,10 @@ public class Puit {
 		return sortie;
 	}
 	
+	/**
+	 * Affiche graphiquement le puit
+	 * @param g : graphique dans lequel est déssiné le puit
+	 */
 	public void Afficher(Graphics g) {
 		for (int i = 2; i < dimGrilleX-2; i++) {
 			for (int j = 0; j < dimGrilleY-2; j++) {
@@ -224,12 +228,20 @@ public class Puit {
 		 
 	}
 	
+	/**
+	 * Affiche tout le puit dans la console
+	 */
 	public void afficher() {
 		for(int i=0;i<dimGrilleY;i++) {
 			afficherLigne(i);
 		}
 		System.out.print("\n");
 	}
+	
+	/**
+	 * Affiche une ligne du tétromino dans la console
+	 * @param j : entier correspondant à la ligne que l'on veut afficher
+	 */
 	public void afficherLigne(int j) {
 		for(int i=0;i<dimGrilleX;i++) {
 			System.out.print(grille[i][j].getCouleur());
@@ -238,6 +250,9 @@ public class Puit {
 		System.out.print("\n");
 	}
 	
+	/**
+	 * Tourne le tétromino
+	 */
 	public void RotationTetromino() {
 		int position = this.TetromnoActuel.getPosition();
 		this.TetromnoActuel.setPosition((position+1)%4);
@@ -329,10 +344,10 @@ public class Puit {
 		for(int i=0;i<4;i++) {
 			for (int j = 0; j < 4; j++) {
 				if(this.grille[i+this.repereX][j+this.repereY].getCouleur()!=0)
-					return false;
+					return true;
 			}
 		}
-		return true;
+		return false;
 	}
 
 

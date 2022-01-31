@@ -65,7 +65,6 @@ public class Interface extends JFrame {
 	Tetromino tetrominoSuivant;
 	
 	private ImageIcon game_over = new ImageIcon("src/GameOver.png");
-	private ImageIcon tetris_background = new ImageIcon("src/tetris_image.jpg");
 	private ImageIcon tetrisWord = new ImageIcon("src/Tetris.png");
 	
 	int Score;
@@ -84,25 +83,6 @@ public class Interface extends JFrame {
 			public void run() {
 				try {
 					Interface frame = new Interface();
-					/*frame.setVisible(true);
-					frame.setBackground(Color.LIGHT_GRAY);
-					ImageIcon icon = new ImageIcon("src/tetris_image.jpg");
-					JTextArea text = new JTextArea() 
-				    {
-				      Image img = icon.getImage();
-				      // instance initializer
-				      {setOpaque(false);}
-				      public void paintComponent(Graphics graphics) 
-				      {
-				        graphics.drawImage(img, 0, 0,560,525, this);
-				        super.paintComponent(graphics);
-				      }
-				    };
-				    JScrollPane pane = new JScrollPane(text);
-				    Container content = frame.getContentPane();
-				    content.add(pane, BorderLayout.CENTER);
-				    frame.setDefaultCloseOperation(3);
-				    //frame.setSize(400, 300);*/
 				    frame.setVisible(true);
 					
 					
@@ -114,9 +94,12 @@ public class Interface extends JFrame {
 		});
 	}
 	
-	//Fonction appelée lorsqu'une touche est pressée
-	//Retourne true si c'est la touche entrée, false sinon
-	//Elle sert également à déplacer et à exercer une rotation sur les tétromino
+	/**
+	 * Fonction appelée lorsqu'une touche est pressée
+	 * Elle sert également à déplacer et à exercer une rotation sur les tétromino
+	 * @param evt : touche appelé
+	 * @return true si c'est la touche entrée, false sinon
+	 */
 	private boolean KeyPressed(KeyEvent evt) {
 		Boolean depFait;
 		boolean flag = false ;
@@ -159,13 +142,21 @@ public class Interface extends JFrame {
 		 
 		 
 	}
+	/**
+	 * Affiche le mot tétris
+	 * @param graphics : graphique dans lequel sera affiché l'image tétris
+	 */
 	public void dessinerTetris(Graphics graphics) 
     {
 		Image image;
 		image = tetrisWord.getImage();
-		graphics.drawImage(image, 5, 50,100,120,this);
+		graphics.drawImage(image, 5, 50,100,110,this);
     }
 	
+	/**
+	 * Affiche l'image de fin
+	 * @param graphics : graphique dans lequel sera affiché l'image de fin
+	 */
 	public void dessinerImage(Graphics graphics) 
     {
 		Image image;
@@ -173,13 +164,10 @@ public class Interface extends JFrame {
 		graphics.drawImage(image, 0, 0,this.getContentPane().getWidth(),this.getContentPane().getHeight(),this);
     }
 	
-	@Override
-	public void paintComponents(Graphics g) { // paint() method
-		
-		g.drawImage(tetris_background.getImage(),0,0,560,525, this);
-		super.paintComponents(g);
-	}
-	
+	/**
+	 * affiche le puit
+	 * @param g : graphique dans lequel sera affiché le puit
+	 */
 	public void dessinerPuit(Graphics g) {
 		
 		 Graphics bufferGraphics;
@@ -191,15 +179,17 @@ public class Interface extends JFrame {
 		 // On colore le fond de l'image en blanc
 		 bufferGraphics.setColor(Color.LIGHT_GRAY);
 		 bufferGraphics.fillRect(0,0,this.getContentPane().getWidth(),this.getContentPane().getHeight()); 
-		 //bufferGraphics.fillRect(0,0,this.getContentPane().getWidth(),this.getContentPane().getHeight()); 
 		 // on dessine notre objet au sein de notre image
 		 p.Afficher(bufferGraphics);
 		 // On afficher l'image mémoire à l'écran, on choisit où afficher l'image 
-		 //offscreen.setOpaque(false);
 		 g.drawImage(offscreen,100,10,null);
 	}
 	
 	
+	/**
+	 * Fonction pour afficher le prochain tétromino
+	 * @param g : graphique dans lequel sera affiché le prochain tétromino
+	 */
 	public void dessinerTetrominoADroite(Graphics g)
 	{
 	 Graphics bufferGraphics;
@@ -214,18 +204,15 @@ public class Interface extends JFrame {
 	 bufferGraphics.setColor(Color.GRAY);
 	 bufferGraphics.fillRect(0,0,this.getContentPane().getWidth(),this.getContentPane().getHeight()); 
 	 
+	 // on déssine le maillage 
 	 for (int i = 0; i < 4; i++) {
 			
 		 bufferGraphics.setColor(Color.WHITE);
 		 bufferGraphics.drawLine(i*20,0,i*20,80);
 		 bufferGraphics.drawLine(0,i*20,80,i*20);
-	}
-	
-	 
+	 }
 	 // on dessine notre objet au sein de notre image
-	 
 	 tetrominoSuivant.Afficher(bufferGraphics);
-	 
 	 // On afficher l'image mémoire à l'écran, on choisit où afficher l'image 
 	 g.drawImage(offscreen,400,10,null);
 	}
@@ -246,6 +233,10 @@ public class Interface extends JFrame {
 	 g.drawImage(offscreen,400,300,null);
 	}
 	
+	/**
+	 * Fonction pour tirer un tétromino au hasards
+	 * @return tétromino typé entre 1 et 7
+	 */
 	public Tetromino tirageTetromino() {
 		Random random = new Random();
 		int randomTetromino = random.nextInt(7) + 1;
@@ -271,19 +262,22 @@ public class Interface extends JFrame {
 		 return prochainTetromino;
 	}
 	
+	/**
+	 * Fonction qui change le tétromino actuel et qui supprime potenitiellement des lignes
+	 * fonction qui intervien lorsque le tétromino actuel ne peut plus bouger
+	 * @param g : graphique utilisé
+	 */
 	public void ChangementTetromino(Graphics g)
 	{
-		//p.afficher();
+		// on regarde si une ou plusieurs lignes n'ont pas été complété
 		for (int i = tetrominoActuel.getObjetGraphique(0, 0).getY(); i <= tetrominoActuel.getObjetGraphique(3, 3).getY(); i++) {
-			//p.afficherLigne(i);
 			if(p.LigneComplete(i)) {
-				//System.out.print(i+"\n");
-				//p.afficherLigne(i);
 				p.SuppressionLigne(i);
 				Score+=100;
 				dessinerScore(g);
 			}
 		}
+		//passage au tétromino suivant
 		tetrominoActuel=tetrominoSuivant;
 		p.AjouterTetromino(tetrominoActuel);
 		tetrominoSuivant=tirageTetromino();
@@ -292,18 +286,25 @@ public class Interface extends JFrame {
 		dessinerTetrominoADroite(contentPane.getGraphics());
 	}
 	
-	private int ticTimer(Graphics g) {
+	/**
+	 * Actions appelé à chaque tic de timer
+	 * @param g : graphique utilisé
+	 * @return
+	 */
+	private Boolean ticTimer(Graphics g) {
 		Boolean depFait=p.déplacementBasPossible();
-			if(depFait)
-				p.déplacementBas();
+		//le déplacement vers le bas est possible 
+		if(depFait)
+			p.déplacementBas();
+		else
+			//la partie n'est pas perdu
+			if(!p.partiePerdu())
+				ChangementTetromino(g);
 			else
-				if(p.partiePerdu())
-					ChangementTetromino(g);
-				else
-					return 0;
+				return false;
 		
 		dessinerPuit(contentPane.getGraphics());
-		return 1;
+		return true;
 		}
 	
 
@@ -321,10 +322,8 @@ public class Interface extends JFrame {
 		contentPane.setFocusable(true);
 		contentPane.setBackground(Color.LIGHT_GRAY);
 
-		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 560, 525);
-		//BufferedImage img = ImageIO.read("src/game_over.png");
-		//contentPane.setOpaque(false);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		
 		setContentPane(contentPane);
@@ -337,55 +336,52 @@ public class Interface extends JFrame {
 		else 
 			lblNewLabel.setVisible(true);
 		contentPane.add(lblNewLabel);
-		
-		
-		
-		//contentPane.getGraphics().drawImage(game_over.getImage(),165,10,150,150,null);
+
 		contentPane.addKeyListener(new KeyAdapter() {
 			
 			@Override
 			public void keyPressed(KeyEvent e) {
+				//on regarde si la touche entrée a été actionné
 				if(KeyPressed(e)) {
-					//contentPane.remove(lblNewLabel);
-					//contentPane.remove(lbtxt);
-					//TextEntree.setVisible(false);
 					
+					// On colore le fond de l'image en gris clair
 					Image fond= createImage(getContentPane().getWidth(),getContentPane().getHeight());
 					Graphics g=fond.getGraphics();
-					 // On colore le fond de l'image en blanc
-					 g.setColor(Color.LIGHT_GRAY);
-					 g.fillRect(0,0,getContentPane().getWidth(),getContentPane().getHeight()); 
-					 
+					g.setColor(Color.LIGHT_GRAY);
+					g.fillRect(0,0,getContentPane().getWidth(),getContentPane().getHeight()); 
+					//on applique cela à notre contentPane
 					contentPane.getGraphics().drawImage(fond,0,0,null);
-					//contentPane.getGraphics().fillRect(0,0,getContentPane().getWidth(),getContentPane().getHeight()); 
-					 
-					//contentPane.getGraphics().drawRect(game_over.getImage(),165,10,150,150,null);
+
 					Score=0;
+					//initialisation du puit et des tétrominos
 					tetrominoActuel=tirageTetromino();
 					tetrominoSuivant=tirageTetromino();
 					p = new Puit(10,10,20);
 					p.AjouterTetromino(tetrominoActuel);
 					
-					//contentPane.setBackground(Color.LIGHT_GRAY);
+					//on déssine les éléments du l'image
 					dessinerScore(contentPane.getGraphics());
 					dessinerPuit(contentPane.getGraphics());
 					dessinerTetrominoADroite(contentPane.getGraphics());
 					dessinerTetris(contentPane.getGraphics());
 
+					//initialisation du timmer
 					monTimer = new Timer();
+					//tache du timer
 					task = new TimerTask() {
 					 public void run() {
 						 //Le joueur a perdu
-						 if (ticTimer(contentPane.getGraphics())==0) {
+						 //on appel la fonction ticTimer
+						 if (!ticTimer(contentPane.getGraphics())) {
 							 monTimer.cancel();
 							 partie_en_cours = false ;
 							 //affichage game over
 							 dessinerImage(getGraphics());
-							 //contentPane.getGraphics().drawImage(game_over.getImage(),165,10,150,150,null);
 						 }
 						
 					 }
 					};
+					//rythme d'appel de la fonction task 
 					monTimer.schedule(task, new Date(), vitesse);
 				}
 			}
