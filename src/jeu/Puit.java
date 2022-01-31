@@ -61,7 +61,8 @@ public class Puit {
 			for (int j = 3; j > -1; j--) {
 				if(this.TetromnoActuel.getObjetGraphique(i, j).getCouleur()!=0) {
 					grille[TetromnoActuel.getObjetGraphique(i, j).getX()][TetromnoActuel.getObjetGraphique(i, j).getY()].setCouleur(0);
-					grille[TetromnoActuel.getObjetGraphique(i, j).getX()][TetromnoActuel.getObjetGraphique(i, j).getY()+1].setCouleur(this.TetromnoActuel.getObjetGraphique(i, j).getCouleur());
+					grille[TetromnoActuel.getObjetGraphique(i, j).getX()][TetromnoActuel.getObjetGraphique(i, j).getY()+1].setCouleur(
+							this.TetromnoActuel.getObjetGraphique(i, j).getCouleur());
 				}
 			}
 		}
@@ -78,7 +79,8 @@ public class Puit {
 			for (int j = 0; j < 4; j++) {
 				if(this.TetromnoActuel.getObjetGraphique(i, j).getCouleur()!=0) {
 					grille[TetromnoActuel.getObjetGraphique(i, j).getX()][TetromnoActuel.getObjetGraphique(i, j).getY()].setCouleur(0);
-					grille[TetromnoActuel.getObjetGraphique(i, j).getX()-1][TetromnoActuel.getObjetGraphique(i, j).getY()].setCouleur(this.TetromnoActuel.getObjetGraphique(i, j).getCouleur());
+					grille[TetromnoActuel.getObjetGraphique(i, j).getX()-1][TetromnoActuel.getObjetGraphique(i, j).getY()].setCouleur(
+							this.TetromnoActuel.getObjetGraphique(i, j).getCouleur());
 				}
 			}
 		}
@@ -96,7 +98,8 @@ public class Puit {
 			for (int j = 0; j < 4; j++) {
 				if(this.TetromnoActuel.getObjetGraphique(i, j).getCouleur()!=0) {
 					grille[TetromnoActuel.getObjetGraphique(i, j).getX()][TetromnoActuel.getObjetGraphique(i, j).getY()].setCouleur(0);
-					grille[TetromnoActuel.getObjetGraphique(i, j).getX()+1][TetromnoActuel.getObjetGraphique(i, j).getY()].setCouleur(this.TetromnoActuel.getObjetGraphique(i, j).getCouleur());
+					grille[TetromnoActuel.getObjetGraphique(i, j).getX()+1][TetromnoActuel.getObjetGraphique(i, j).getY()].setCouleur(
+							this.TetromnoActuel.getObjetGraphique(i, j).getCouleur());
 				}
 			}
 		}
@@ -109,7 +112,6 @@ public class Puit {
 	 */
 	public Boolean déplacementBasPossible() {
 		Boolean sortie=true;
-		
 		for(int i=0; i<4; i++) {
 			for (int j = 3; j > -1; j--) {
 				if(this.TetromnoActuel.getObjetGraphique(i, j).getCouleur()!=0 ) {
@@ -130,9 +132,7 @@ public class Puit {
 							sortie=false;
 						}
 					}
-					
 				}
-				
 			}
 		}
 		return sortie;
