@@ -14,14 +14,23 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
+
+import javax.swing.JLabel;
+
 import java.awt.Image;
 
+import javax.imageio.ImageIO;
+import javax.print.DocFlavor.URL;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.ImageIcon;
-
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-<<<<<<< HEAD
-=======
 import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -31,7 +40,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.awt.event.ActionEvent;
->>>>>>> branch 'master' of https://github.com/Tetris-du-Turfus/Tetris.git
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -56,6 +64,7 @@ public class Interface extends JFrame {
 	Tetromino tetrominoSuivant;
 	
 	private ImageIcon game_over = new ImageIcon("src/game_over.png");
+	private ImageIcon tetris_background = new ImageIcon("src/tetris_image.jpg");
 	
 	int Score;
 	boolean partie_en_cours = false ;
@@ -150,8 +159,6 @@ public class Interface extends JFrame {
 	}
 	
 	
-<<<<<<< HEAD
-=======
 	public void dessinerImage(Graphics graphics) 
     {
 		Image image;
@@ -159,15 +166,10 @@ public class Interface extends JFrame {
 		graphics.drawImage(image, 100, 100,200,200, this);
     }
 	
->>>>>>> branch 'master' of https://github.com/Tetris-du-Turfus/Tetris.git
 	@Override
 	public void paintComponents(Graphics g) { // paint() method
 		
-<<<<<<< HEAD
-		g.drawImage(game_over.getImage(),0,0,200,200, this);
-=======
 		g.drawImage(tetris_background.getImage(),0,0,560,525, this);
->>>>>>> branch 'master' of https://github.com/Tetris-du-Turfus/Tetris.git
 		super.paintComponents(g);
 	}
 	
@@ -280,10 +282,6 @@ public class Interface extends JFrame {
 		dessinerTetrominoADroite(contentPane.getGraphics());
 	}
 	
-<<<<<<< HEAD
-	
-=======
->>>>>>> branch 'master' of https://github.com/Tetris-du-Turfus/Tetris.git
 	private int ticTimer(Graphics g) {
 		int depFait=p.déplacementBasPossible();
 			if(depFait==1)
@@ -297,6 +295,8 @@ public class Interface extends JFrame {
 		dessinerPuit(contentPane.getGraphics());
 		return 1;
 		}
+	
+
 	
 	
 	/**
@@ -320,8 +320,6 @@ public class Interface extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-<<<<<<< HEAD
-=======
 		JLabel lbtxt = new JLabel("Appuyer sur Entr\u00E9e pour jouer");
 		lbtxt.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lbtxt.setForeground(Color.WHITE);
@@ -333,7 +331,6 @@ public class Interface extends JFrame {
 		lblNewLabel.setBounds(5, 5, 552, 478);
 		contentPane.add(lblNewLabel);
 		
->>>>>>> branch 'master' of https://github.com/Tetris-du-Turfus/Tetris.git
 		
 		
 		//contentPane.getGraphics().drawImage(game_over.getImage(),165,10,150,150,null);
@@ -342,9 +339,6 @@ public class Interface extends JFrame {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if(KeyPressed(e)) {
-<<<<<<< HEAD
-
-=======
 					
 					//TextEntree.setVisible(false);
 					//repaint();
@@ -355,7 +349,6 @@ public class Interface extends JFrame {
 					p.AjouterTetromino(tetrominoActuel);
 					
 					//contentPane.setBackground(Color.BLACK);
->>>>>>> branch 'master' of https://github.com/Tetris-du-Turfus/Tetris.git
 					dessinerScore(contentPane.getGraphics());
 					dessinerPuit(contentPane.getGraphics());
 					dessinerTetrominoADroite(contentPane.getGraphics());
