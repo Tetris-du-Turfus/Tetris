@@ -1,6 +1,10 @@
 package jeu;
 import java.awt.Graphics;
 
+/**
+ * @author Camille et Clément
+ *Classe Tétromino
+ */
 public abstract class Tetromino {
 	
 	protected ObjetGraphique[][][] tab;

@@ -3,6 +3,10 @@ package jeu;
 import java.awt.Color;
 import java.awt.Graphics;
 
+/**
+ * @author Camille et Clément
+ * Classe ObjetGraphique
+ */
 public class ObjetGraphique {
 	protected int x;
 	protected int y;

@@ -3,6 +3,10 @@ package jeu;
 import java.awt.Color;
 import java.awt.Graphics;
 
+/**
+ * @author Camille est Clément
+ *Classe puit
+ */
 public class Puit {
 	
 	//grille d'objetGraphique représentant le puit
