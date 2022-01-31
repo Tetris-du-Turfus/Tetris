@@ -282,7 +282,8 @@ public class Puit {
 			for (int j = 0; j < 4; j++) {
 				if(this.grille[TetromnoActuel.getObjetGraphique(i, j).getX()][TetromnoActuel.getObjetGraphique(i, j).getY()].getCouleur()!=0 ) {
 					int val=this.grille[TetromnoActuel.getObjetGraphique(i, j).getX()][TetromnoActuel.getObjetGraphique(i, j).getY()].getCouleur()+
-							this.TetromnoActuel.getObjetGraphique(i, j,(position+1)%4).getCouleur()-this.TetromnoActuel.getObjetGraphique(i, j).getCouleur();
+							this.TetromnoActuel.getObjetGraphique(i, j,(position+1)%4).getCouleur()-
+							this.TetromnoActuel.getObjetGraphique(i, j).getCouleur();
 					
 					if(val>18) {
 						sortie=false;

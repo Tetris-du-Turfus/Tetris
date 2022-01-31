@@ -150,7 +150,7 @@ public class Interface extends JFrame {
     {
 		Image image;
 		image = tetrisWord.getImage();
-		graphics.drawImage(image, 5, 50,100,110,this);
+		graphics.drawImage(image, 5, 50,100,100,this);
     }
 	
 	/**
@@ -227,10 +227,12 @@ public class Interface extends JFrame {
 	 // On récupère l'objet de type Graphics permettant de dessiner dans cette image
 	 bufferGraphics = offscreen.getGraphics();
 	 // On colore le fond de l'image en blanc
-	 bufferGraphics.setColor(Color.RED);
-	 bufferGraphics.drawString(String.valueOf(Score),20,20);	 
+	 bufferGraphics.setColor(Color.LIGHT_GRAY);
+	 bufferGraphics.fillRect(0,0,this.getContentPane().getWidth(),this.getContentPane().getHeight()); 
+	 bufferGraphics.setColor(Color.BLACK);
+	 bufferGraphics.drawString("Score : " +String.valueOf(Score),20,20);	 
 	 // On afficher l'image mémoire à l'écran, on choisit où afficher l'image 
-	 g.drawImage(offscreen,400,300,null);
+	 g.drawImage(offscreen,350,200,null);
 	}
 	
 	/**
@@ -315,6 +317,7 @@ public class Interface extends JFrame {
 	 *
 	 */
 	public Interface() {
+		setTitle("T\u00E9tris C Euvrard & C. Faucheux");
 	    
 		
 		contentPane = new JPanel();
