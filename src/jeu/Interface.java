@@ -11,31 +11,12 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-
-import javax.swing.JLabel;
-
 import java.awt.Image;
 
-import javax.imageio.ImageIO;
-import javax.print.DocFlavor.URL;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
+
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.awt.event.ActionEvent;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -53,7 +34,6 @@ public class Interface extends JFrame {
 	Tetromino tetrominoSuivant;
 	
 	private ImageIcon game_over = new ImageIcon("src/game_over.png");
-	private ImageIcon tetris_background = new ImageIcon("src/tetris_image.jpg");
 	
 	int Score;
 	boolean partie_en_cours = false ;
@@ -126,16 +106,10 @@ public class Interface extends JFrame {
 	}
 	
 	
-	public void dessinerImage(Graphics graphics) 
-    {
-      graphics.drawImage(tetris_background.getImage(),0,0,200,200, this);
-      
-    }
-	
 	@Override
 	public void paintComponents(Graphics g) { // paint() method
 		
-		g.drawImage(tetris_background.getImage(),0,0,200,200, this);
+		g.drawImage(game_over.getImage(),0,0,200,200, this);
 		super.paintComponents(g);
 	}
 	
@@ -248,31 +222,6 @@ public class Interface extends JFrame {
 		dessinerTetrominoADroite(contentPane.getGraphics());
 	}
 	
-
-	public void dessiner(Graphics g)
-	{
-	 Graphics bufferGraphics;
-	 Image offscreen;
-	 // On crée une image en mémoire de la taille du ContentPane, on peut choisir la taille que l'on souhaite
-	 offscreen = createImage(100,100);
-	 // On récupère l'objet de type Graphics permettant de dessiner dans cette image
-	 bufferGraphics = offscreen.getGraphics();
-	 // On colore le fond de l'image en blanc
-	 bufferGraphics.setColor(Color.WHITE);
-	 bufferGraphics.fillRect(0,0,this.getContentPane().getWidth(),this.getContentPane().getHeight());
-	 
-	 // on dessine notre objet au sein de notre image
-	 bufferGraphics.setColor(Color.YELLOW);
-	 bufferGraphics.fillRect(0,0,50,50);
-	 bufferGraphics.setColor(Color.GREEN);
-	 bufferGraphics.fillRect(50,50,50,50);
-	 ObjetGraphique Objt1=new ObjetGraphique(0, 1, 50);
-	 Objt1.Afficher(bufferGraphics);
-	 ObjetGraphique Objt2=new ObjetGraphique(1, 0, 50);
-	 Objt2.Afficher(bufferGraphics);
-	 // On afficher l'image mémoire à l'écran, on choisit où afficher l'image 
-	 g.drawImage(offscreen,50,50,null);
-	}
 	
 	private int ticTimer(Graphics g) {
 		int depFait=p.déplacementBasPossible();
@@ -287,8 +236,6 @@ public class Interface extends JFrame {
 		dessinerPuit(contentPane.getGraphics());
 		return 1;
 		}
-	
-
 	
 	
 	/**
@@ -316,37 +263,12 @@ public class Interface extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		/*
-		this.setContentPane(new JPanel() {
-	         @Override
-	         public void paintComponent(Graphics g) {
-	        	if (!partie_en_cours) {
-		            super.paintComponent(g);
-		            g.drawImage(tetris_background.getImage(), 0, 0, null);
-	        	}
-	        	else {
-	        		super.paintComponent(g);
-	        		contentPane.setBackground(Color.BLACK);
-	        	}
-	         }
-	      });
-		
-		repaint();
-		
-		*/
-		
-
-
-		
 		
 		contentPane.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				
 				if(KeyPressed(e)) {
-					
-					//repaint();
-					
 
 					dessinerScore(contentPane.getGraphics());
 					dessinerPuit(contentPane.getGraphics());

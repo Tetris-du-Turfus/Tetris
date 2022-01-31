@@ -96,6 +96,4 @@ public class ObjetGraphique {
 		 g.fillRect(this.x*this.tailleCase+1,this.y*this.tailleCase+1, this.tailleCase-2,this.tailleCase-2);
 	 }
 	
-	// test ici
-	// comment
 }
