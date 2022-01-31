@@ -5,10 +5,13 @@ import java.awt.BorderLayout;
 import java.awt.Graphics;
 
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
 import java.awt.Image;
@@ -17,11 +20,30 @@ import javax.swing.ImageIcon;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+<<<<<<< HEAD
+=======
+import java.awt.event.KeyListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.awt.event.ActionEvent;
+>>>>>>> branch 'master' of https://github.com/Tetris-du-Turfus/Tetris.git
 
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.Date;
 import java.util.Random;
+import javax.swing.SwingConstants;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.BoxLayout;
+import java.awt.Font;
 
 
 public class Interface extends JFrame {
@@ -51,8 +73,26 @@ public class Interface extends JFrame {
 			public void run() {
 				try {
 					Interface frame = new Interface();
-					frame.setVisible(true);
+					/*frame.setVisible(true);
 					frame.setBackground(Color.BLACK);
+					ImageIcon icon = new ImageIcon("src/tetris_image.jpg");
+					JTextArea text = new JTextArea() 
+				    {
+				      Image img = icon.getImage();
+				      // instance initializer
+				      {setOpaque(false);}
+				      public void paintComponent(Graphics graphics) 
+				      {
+				        graphics.drawImage(img, 0, 0,560,525, this);
+				        super.paintComponent(graphics);
+				      }
+				    };
+				    JScrollPane pane = new JScrollPane(text);
+				    Container content = frame.getContentPane();
+				    content.add(pane, BorderLayout.CENTER);
+				    frame.setDefaultCloseOperation(3);
+				    //frame.setSize(400, 300);*/
+				    frame.setVisible(true);
 					
 					
 				} catch (Exception e) {
@@ -69,8 +109,9 @@ public class Interface extends JFrame {
 	private boolean KeyPressed(KeyEvent evt) {
 		int depFait;
 		boolean flag = false ;
-		
-		switch(evt.getKeyCode()) {
+		if(partie_en_cours)
+		{
+			switch(evt.getKeyCode()) {
 			case KeyEvent.VK_SPACE:
 				depFait=p.RotationPossible();
 				if(depFait==1)
@@ -95,21 +136,38 @@ public class Interface extends JFrame {
 					p.déplacementDroite();
 				dessinerPuit(contentPane.getGraphics());
 				break;
-			case KeyEvent.VK_ENTER:
-				flag = true ;
-				break ;
-				
+			}
 		}
+		else if(evt.getKeyCode()==KeyEvent.VK_ENTER) {
+			partie_en_cours=true;
+			flag=true;
+		}
+			
+		
 		return flag;
 		 
 		 
 	}
 	
 	
+<<<<<<< HEAD
+=======
+	public void dessinerImage(Graphics graphics) 
+    {
+		Image image;
+		image = game_over.getImage();
+		graphics.drawImage(image, 100, 100,200,200, this);
+    }
+	
+>>>>>>> branch 'master' of https://github.com/Tetris-du-Turfus/Tetris.git
 	@Override
 	public void paintComponents(Graphics g) { // paint() method
 		
+<<<<<<< HEAD
 		g.drawImage(game_over.getImage(),0,0,200,200, this);
+=======
+		g.drawImage(tetris_background.getImage(),0,0,560,525, this);
+>>>>>>> branch 'master' of https://github.com/Tetris-du-Turfus/Tetris.git
 		super.paintComponents(g);
 	}
 	
@@ -222,7 +280,10 @@ public class Interface extends JFrame {
 		dessinerTetrominoADroite(contentPane.getGraphics());
 	}
 	
+<<<<<<< HEAD
 	
+=======
+>>>>>>> branch 'master' of https://github.com/Tetris-du-Turfus/Tetris.git
 	private int ticTimer(Graphics g) {
 		int depFait=p.déplacementBasPossible();
 			if(depFait==1)
@@ -244,32 +305,57 @@ public class Interface extends JFrame {
 	 */
 	public Interface() {
 	    
-		Score=0;
-		tetrominoActuel=tirageTetromino();
-		tetrominoSuivant=tirageTetromino();
-		p = new Puit(10,10,20);
-		p.AjouterTetromino(tetrominoActuel);
+		
 		contentPane = new JPanel();
 		
 		contentPane.setFocusable(true);
-		
-		contentPane.setBackground(Color.BLACK);
-		this.getContentPane().setBackground(Color.BLACK);
+		//contentPane.setBackground(Color.BLACK);
 
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 560, 525);
-		
+		//BufferedImage img = ImageIO.read("src/game_over.png");
+		//contentPane.setOpaque(false);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+<<<<<<< HEAD
+=======
+		JLabel lbtxt = new JLabel("Appuyer sur Entr\u00E9e pour jouer");
+		lbtxt.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lbtxt.setForeground(Color.WHITE);
+		lbtxt.setBounds(147, 313, 233, 36);
+		contentPane.add(lbtxt);
 		
+		JLabel lblNewLabel = new JLabel("New label");
+		lblNewLabel.setIcon(new ImageIcon(Interface.class.getResource("/jeu/tetris_image.jpg")));
+		lblNewLabel.setBounds(5, 5, 552, 478);
+		contentPane.add(lblNewLabel);
+		
+>>>>>>> branch 'master' of https://github.com/Tetris-du-Turfus/Tetris.git
+		
+		
+		//contentPane.getGraphics().drawImage(game_over.getImage(),165,10,150,150,null);
 		contentPane.addKeyListener(new KeyAdapter() {
+			
 			@Override
 			public void keyPressed(KeyEvent e) {
-				
 				if(KeyPressed(e)) {
+<<<<<<< HEAD
 
+=======
+					
+					//TextEntree.setVisible(false);
+					//repaint();
+					Score=0;
+					tetrominoActuel=tirageTetromino();
+					tetrominoSuivant=tirageTetromino();
+					p = new Puit(10,10,20);
+					p.AjouterTetromino(tetrominoActuel);
+					
+					//contentPane.setBackground(Color.BLACK);
+>>>>>>> branch 'master' of https://github.com/Tetris-du-Turfus/Tetris.git
 					dessinerScore(contentPane.getGraphics());
 					dessinerPuit(contentPane.getGraphics());
 					dessinerTetrominoADroite(contentPane.getGraphics());
@@ -277,16 +363,13 @@ public class Interface extends JFrame {
 					monTimer = new Timer();
 					task = new TimerTask() {
 					 public void run() {
-						 if(Score>40) {
-							 vitesse=200;
-						 }
-						 
 						 //Le joueur a perdu
 						 if (ticTimer(contentPane.getGraphics())==0) {
 							 monTimer.cancel();
 							 partie_en_cours = false ;
 							 //affichage game over
-							 contentPane.getGraphics().drawImage(game_over.getImage(),165,10,150,150,null);
+							 dessinerImage(getGraphics());
+							 //contentPane.getGraphics().drawImage(game_over.getImage(),165,10,150,150,null);
 						 }
 						
 					 }
@@ -296,7 +379,6 @@ public class Interface extends JFrame {
 			}
 		});
 	
-		
 		
 	}
 }
