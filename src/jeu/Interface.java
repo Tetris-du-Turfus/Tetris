@@ -51,6 +51,7 @@ import java.awt.GridLayout;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.BoxLayout;
+import java.awt.Font;
 
 
 public class Interface extends JFrame {
@@ -320,7 +321,9 @@ public class Interface extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lbtxt = new JLabel("Appuyer sur Entr\u00E9e pour jouer");
-		lbtxt.setBounds(115, 358, 187, 80);
+		lbtxt.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lbtxt.setForeground(Color.WHITE);
+		lbtxt.setBounds(147, 313, 233, 36);
 		contentPane.add(lbtxt);
 		
 		JLabel lblNewLabel = new JLabel("New label");
