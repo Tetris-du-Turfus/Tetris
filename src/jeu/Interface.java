@@ -63,7 +63,7 @@ public class Interface extends JFrame {
 	Tetromino tetrominoActuel;
 	Tetromino tetrominoSuivant;
 	
-	private ImageIcon game_over = new ImageIcon("src/game_over.png");
+	private ImageIcon game_over = new ImageIcon("src/GameOver.png");
 	private ImageIcon tetris_background = new ImageIcon("src/tetris_image.jpg");
 	
 	int Score;
@@ -163,7 +163,7 @@ public class Interface extends JFrame {
     {
 		Image image;
 		image = game_over.getImage();
-		graphics.drawImage(image, 100, 100,200,200, this);
+		graphics.drawImage(image, 0, 0,this.getContentPane().getWidth(),this.getContentPane().getHeight(),this);
     }
 	
 	@Override
@@ -178,15 +178,17 @@ public class Interface extends JFrame {
 		 Graphics bufferGraphics;
 		 Image offscreen;
 
-		 offscreen = createImage(300,480);
+		 offscreen = createImage(260,480);
 		 // On récupère l'objet de type Graphics permettant de dessiner dans cette image
 		 bufferGraphics = offscreen.getGraphics();
 		 // On colore le fond de l'image en blanc
-		 bufferGraphics.setColor(Color.GRAY);
+		 bufferGraphics.setColor(Color.BLACK);
+		 bufferGraphics.fillRect(0,0,this.getContentPane().getWidth(),this.getContentPane().getHeight()); 
 		 //bufferGraphics.fillRect(0,0,this.getContentPane().getWidth(),this.getContentPane().getHeight()); 
 		 // on dessine notre objet au sein de notre image
 		 p.Afficher(bufferGraphics);
 		 // On afficher l'image mémoire à l'écran, on choisit où afficher l'image 
+		 //offscreen.setOpaque(false);
 		 g.drawImage(offscreen,100,10,null);
 	}
 	
@@ -309,7 +311,7 @@ public class Interface extends JFrame {
 		contentPane = new JPanel();
 		
 		contentPane.setFocusable(true);
-		//contentPane.setBackground(Color.BLACK);
+		contentPane.setBackground(Color.BLACK);
 
 		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 560, 525);
@@ -324,11 +326,19 @@ public class Interface extends JFrame {
 		lbtxt.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lbtxt.setForeground(Color.WHITE);
 		lbtxt.setBounds(147, 313, 233, 36);
+		if(partie_en_cours)
+			lbtxt.setVisible(false);
+		else 
+			lbtxt.setVisible(true);
 		contentPane.add(lbtxt);
 		
 		JLabel lblNewLabel = new JLabel("New label");
 		lblNewLabel.setIcon(new ImageIcon(Interface.class.getResource("/jeu/tetris_image.jpg")));
 		lblNewLabel.setBounds(5, 5, 552, 478);
+		if(partie_en_cours)
+			lblNewLabel.setVisible(false);
+		else 
+			lblNewLabel.setVisible(true);
 		contentPane.add(lblNewLabel);
 		
 		
@@ -339,9 +349,13 @@ public class Interface extends JFrame {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if(KeyPressed(e)) {
-					
+					//contentPane.remove(lblNewLabel);
+					//contentPane.remove(lbtxt);
 					//TextEntree.setVisible(false);
-					//repaint();
+					contentPane.getGraphics().setColor(Color.WHITE);
+					contentPane.getGraphics().fillRect(0,0,getContentPane().getWidth(),getContentPane().getHeight()); 
+					 
+					//contentPane.getGraphics().drawRect(game_over.getImage(),165,10,150,150,null);
 					Score=0;
 					tetrominoActuel=tirageTetromino();
 					tetrominoSuivant=tirageTetromino();
