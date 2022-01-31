@@ -34,13 +34,16 @@ public abstract class Tetromino {
 	public void setType(int type) {
 		this.type = type;
 	}
+	
 	public ObjetGraphique getObjetGraphique(int i, int j) {
 		return tab[i][j][position];
 	}
 	
+	
 	public ObjetGraphique getObjetGraphique(int i, int j,int k) {
 		return tab[i][j][k];
 	}
+	
 	
 	public void setRepere(int x,int y) {
 		for (int i = 0; i < 4; i++) {

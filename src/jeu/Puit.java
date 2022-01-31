@@ -6,6 +6,7 @@ import java.awt.Graphics;
 public class Puit {
 	
 	private ObjetGraphique[][] grille;
+	
 	private int positionXGrille;
 	private int positionYGrille;
 	
@@ -17,10 +18,10 @@ public class Puit {
 	
 	private Tetromino TetromnoActuel;
 	
-	public Puit(int positionXGrille, int positionYGrille,int tailleCase) {
+	public Puit(int positionX, int positionY,int tailleCase) {
 		super();
-		this.positionXGrille = positionXGrille;
-		this.positionYGrille = positionYGrille;
+		this.setPositionXGrille(positionX);
+		this.setPositionYGrille(positionY);
 		this.repereX = 5;
 		this.repereY = 0 ;
 		
@@ -174,10 +175,6 @@ public class Puit {
 		}
 		return sortie;
 	}
-	public Puit() {
-		// TODO Auto-generated constructor stub
-		
-	}
 	
 	public void Afficher(Graphics g) {
 		for (int i = 2; i < dimGrilleX-2; i++) {
@@ -194,6 +191,14 @@ public class Puit {
 			g.drawLine(2*this.grille[0][0].tailleCase,j*this.grille[0][0].tailleCase,(dimGrilleX-2)*this.grille[0][0].tailleCase,j*this.grille[0][0].tailleCase);
 		}
 		 
+	}
+	
+	public void afficherLigne(int j) {
+		for(int i=0;i<dimGrilleX;i++) {
+			System.out.print(grille[i][j].getCouleur());
+			System.out.print(" ");
+		}
+		System.out.print("\n");
 	}
 	
 	public void RotationTetromino() {
@@ -302,22 +307,21 @@ public class Puit {
 			this.dimGrilleY = dimGrilleY;
 		}
 
-		public void afficher() {
-			for(int j=0;j<dimGrilleY;j++) {
-				for(int i=0;i<dimGrilleX;i++) {
-					System.out.print(grille[i][j].getCouleur());
-					System.out.print(" ");
-				}
-				System.out.print("\n");
-			}
-			System.out.print("\n");
+
+		public int getPositionYGrille() {
+			return positionYGrille;
 		}
-		public void afficherLigne(int j) {
-			for(int i=0;i<dimGrilleX;i++) {
-				System.out.print(grille[i][j].getCouleur());
-				System.out.print(" ");
-			}
-			System.out.print("\n");
+
+		public void setPositionYGrille(int positionYGrille) {
+			this.positionYGrille = positionYGrille;
+		}
+
+		public int getPositionXGrille() {
+			return positionXGrille;
+		}
+
+		public void setPositionXGrille(int positionXGrille) {
+			this.positionXGrille = positionXGrille;
 		}
 			
 
